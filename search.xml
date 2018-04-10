@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Markdown语法笔记]]></title>
+    <url>%2F2018%2F04%2F10%2FMarkdown%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[标题123456# H1## H2### H3#### H4##### H5###### H6 列表无序列表123- li- li- li 有序列表1231. li1. li1. li 链接直接连接1&lt;https://lcyasdlcy.github.io/&gt; 隐藏连接地址1[我的博客](https://lcyasdlcy.github.io/) 图片链接1![一张图片](https://lcyasdlcy.github.io/1.jpg) 引用123&gt; 引用1&gt; 引用2&gt; 引用3 强调粗体 **粗体**斜体 *斜体*删除 ~~删除~~分割线--- 表格 left center right 1 2 3 4 5 6 1234left|center|right-----|:---:|----:1|2|34|5|6]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F04%2F10%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo使用笔记]]></title>
+    <url>%2F2018%2F04%2F10%2FHexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[前言我的博客站点建好了，之前写过一篇文章了。感觉很好，有总比没有强（聊胜于无）。 但是，访问几次我的博客后，自己都感觉不好意思了。 首页就把所有文章的内容都显示出来了，正常应该每篇文章只显示摘要信息吧？ home、archives、recent posts都是什么鬼，我们是中国人！ 正常博客的基本功能分类、标签、评论都去哪里了？ …… 既然用了hexo，就要相信他，上面这些对hexo来说都是小意思。本文会一一解决之。但是hexo毕竟只是个博客建站工具，除此别无他用，所以我计划只用这一篇文章记录hexo的使用，以后不再写相关的文章了，有需要记录的就这篇文章改吧。 下面进入hexo笔记正文。 笔记Hexo是什么 Hexo is a fast, simple &amp; powerful blog framework powered by Node.jshttps://hexo.io/ 在首页只显示每篇文章的摘要信息方式1在编写md文件内容时，在要显示的内容后、要隐藏的信息前加入一行&lt;!-- more --&gt; 方式2在md文件的fron-matter（每篇文章的开头部分）加入一项description，其值就是文章的摘要。 开启/关闭文章评论功能在front-matter中设置comments: true/false 为文章归档在front-matter中设置categories分类、设置tags标签。下面列出本文的front-matter：1234567title: Hexo使用笔记date: 2018-04-10 10:53:00tags: [tag1, tag2, tag3]categories: Hexocomments: truetoc: true #显示文章目录description: 使用Hexo搭建博客过程的问题笔记 怎么说好的toc、description等都不管用？换个主题试试 更改主题及语言下载主题1$ git clone https://github.com/iissnan/hexo-theme-next themes/next 修改_post.yml12theme: nextlanguage: zh_Hans #应该是去找next主题下的zh_Hans.yml nani？评论还是不行，算了不管了，反正我也不是听人意见的人。有空参考一下https://www.zhihu.com/question/38797520这篇吧。 创建分类页、标签页12$ hexo new page categories$ hexo new page tags 修改categories/index.md12title: 分类type: &quot;categories&quot; 修改tags/index.md12title: 标签type: &quot;tags&quot; 最后别忘了hexo clean &amp; hexo g &amp; hexo d next主题的样式选择修改themes/next/_config.yml文件1234# Schemes#scheme: Musescheme: Mist#scheme: Pisces next主题菜单栏显示控制修改themes/next/_config.yml文件123456menu: home: / || home about: /about/ || user tags: /tags/ || tags categories: /categories/ || th archives: /archives/ || archive 站内搜索安装相关插件12$ npm install hexo-generator-search --save$ npm install hexo-generator-searchdb --save **修改_config.yml12345search: path: search.xml field: post format: html limit: 10000 === 其他以后再补充===]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>tag1</tag>
+        <tag>tag2</tag>
+        <tag>tag3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[我在github上的第一篇博文]]></title>
+    <url>%2F2018%2F04%2F10%2F%E6%88%91%E5%9C%A8github%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E6%96%87%2F</url>
+    <content type="text"><![CDATA[前言这是我在github上的第一篇博客文章，相比之前在博客园和CSDN上写的零散几篇，写在这里让我瞬间感觉档次提高不少。以后所有的技术相关的文章，不管是从别人那里摘抄的还是自己想出来的，我保证除了连接地址其他都会是手敲出来的，所以也就不注明是原创还是转载了。这篇写点什么呢？这个博客站点是用hexo搭建的，就先写一下搭建过程吧。 博客搭建过程windows下 windows7 64bitnode v8.9.3git version 2.15.1.windows.2 最终以失败告终，最后用hexo d往github上发布的时候出错，大概意思是/dev/tty不存在。不知道怎么处理，或者是自己没耐心。还是老实去linux下玩吧。 linux下linux下就简单了，大概记录一下操作步骤。环境准备： centos 7git是用yum安装的，没关心版本node v0.10.44 那么问题来了，hexo好像不支持这个版本的nodejs，我的nodejs还有别的用呢，怎么办？要不说linux下简单呢。且看如下操作步骤： 安装nodejsnvm是nodejs版本管理器，能任意切换nodejs版本，执行命令安装之。1$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh 或者wget到本地再运行也行，完事记得重启终端。 安装6版本的nodejs：nvm install 6安装8版本的nodejs：nvm install 8使用6版本的nodejs：nvm use 6 安装hexo1$ npm install hexo -g 创建博客站执行命令123$ mkdir myblog$ cd myblog$ hexo init 修改配置_config.yml123deploy: type: git repo: https://github.com/lcyasdlcy/lcyasdlcy.github.io.git 为避免每次发布都要输入用户名密码，可以将repo值写成如下格式：1https://username:password@github.com****** 更安全的方式当然还是用ssh公私钥，这里不说了写文章1$ hexo new post "我的第一篇博文" 或者直接到source/_posts目录下编写xxx.md文档，接下来就是考验markdown语法了。测试1$ hexo s 默认使用4000端口，访问http://localhost:4000看看。如果端口被占用了，使用hexo server -p 5000指定新的端口。 发布博客站到github安装自动部署发布工具hexo-deployer-git1$ npm install hexo-deployer-git --save 发布123$ hexo clean #清理$ hexo g #生成$ hexo d #部署 好了，以后每次想写文章了，重复上面的工作就可以了。]]></content>
+  </entry>
+</search>
