@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;s博客">
 <meta property="og:description" content="使用Hexo搭建博客过程的问题笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-10T05:19:31.505Z">
+<meta property="og:updated_time" content="2018-04-10T05:27:58.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo使用笔记">
 <meta name="twitter:description" content="使用Hexo搭建博客过程的问题笔记">
@@ -191,12 +191,52 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-board">
+          <a href="/board" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            留言
           </a>
         </li>
       
@@ -343,6 +383,7 @@
 <p><strong>方式2</strong><br>在md文件的<code>fron-matter</code>（每篇文章的开头部分）加入一项<code>description</code>，其值就是文章的摘要。</p>
 <h3 id="开启-关闭文章评论功能"><a href="#开启-关闭文章评论功能" class="headerlink" title="开启/关闭文章评论功能"></a>开启/关闭文章评论功能</h3><p>在<code>front-matter</code>中设置<code>comments: true/false</code></p>
 <h3 id="为文章归档"><a href="#为文章归档" class="headerlink" title="为文章归档"></a>为文章归档</h3><p>在<code>front-matter</code>中设置<code>categories</code>分类、设置<code>tags</code>标签。<br>下面列出本文的<code>front-matter</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: Hexo使用笔记</span><br><span class="line">date: 2018-04-10 10:53:00</span><br><span class="line">tags: [tag1, tag2, tag3]</span><br><span class="line">categories: Hexo</span><br><span class="line">comments: true</span><br><span class="line">toc: true #显示文章目录</span><br><span class="line">description: 使用Hexo搭建博客过程的问题笔记</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>怎么说好的toc、description等都不管用？换个主题试试</em></strong></p>
 <h3 id="更改主题及语言"><a href="#更改主题及语言" class="headerlink" title="更改主题及语言"></a>更改主题及语言</h3><p><strong>下载主题</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></p>
 <p><strong>修改_post.yml</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br><span class="line">language: zh_Hans #应该是去找next主题下的zh_Hans.yml</span><br></pre></td></tr></table></figure></p>
 
