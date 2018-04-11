@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[HTTP文件传输]]></title>
+    <url>%2F2018%2F04%2F11%2FHTTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%2F</url>
+    <content type="text"><![CDATA[前言最近在用libcurl写REST接口调用的东西，联想到之前做的HTTP文件传输，又想到在windows下没有搭建成功hexo发布github环境。于是突然有个挺别致的想法：在我的工作机win7下写文章，写好后通过http上传到我的centos7上，然后再在centos上用hexo发布。 怎么样，是不是很别致？写一篇博客文章有N种简单方法，偏偏选这种绕来绕去的方法。算了，权当通过这种方式为近来的工作做笔记了。 搭建HTTP传输服务器要通过http进行文件传输，首先要有文件传输服务器。搭建http服务器第一反应会出现一大堆工具：windows自带的IIS、apache、tomcat、nginx等。这里不想说IIS，一是不想写windows下的工具，再就是图形界面的操作不截图不好说明，不会截图。这里也不想说nginx，因为nginx有别的主要功能，做文件传输服务器太浪费了。（标记一下以后专门写nginx的文章） 一种最简单的方式直接贴命令12$ python -m SimpleHTTPServer #默认开80端口，如果80在用执行下面这个指定一个端口$ python -m SimpleHTTPServer 8000 就一条命令的事，也没有什么配置，想在哪个目录下开服务就在那个目录下执行该命令，实在是简单。 但是，不允许写入文件。 apache httpd在linux下的http服务器首先想到的肯定是apache（也只能想到他），毕竟有大名鼎鼎的LAMP（标记一下以后专门写LAMP的文章）。修改配置文件/etc/httpd/conf/httpd.conf，这是centos7上的配置，其他linux下不知道是不是这个位置。1234567&lt;Directory &quot;/var/www/html/upload&quot;&gt; Dav On AllowOverride None Options All Order allow,deny Allow from all&lt;/Directory&gt; 不知道这些配置都是什么意思，就是从网上抄来的 执行命令chmod 777 /var/www/html/upload，看来777还是比666要管用。777是什么意思呢？就是二进制的111111111，表示所有用户的读写执行权限都开放，所以以后遇到目录读写权限的问题一律777（其实对http文件传输服务器来说666一样好使） apache tomcat用java做web开发肯定第一时间想到的是tomcat了。修改tomcat的conf下的web.xml，在servlet标签下添加如下配置项1234&lt;init-param&gt; &lt;param-name&gt;readonly&lt;/param-name&gt; &lt;param-value&gt;false&lt;/param-value&gt; &lt;/init-param&gt; 意思很明显了，不能只读，我也不知道具体是哪个目录，反正就这样写了。然后建一个web项目，在其WebContent目录下建一个upload目录。（没有亲测，这是从别人那里抄来的） curl命令测试HTTP文件传输测试下载12$ curl -o 1.jpg http://ip/upload/a.jpg #指定名$ curl -O http://ip/upload/a.jpg #原名 测试上传1$ curl -T a.jpg http://localhost/upload/ 我在windows下传到linux下的中文内容的文件怎么处理？1$ iconv -f gbk -t utf-8 1.md &gt; 2.md 我在windows下传到linux下的中文名称的文件怎么处理？12$ convmv -f gbk -t utf-8 *.md #不直接转，只显示给人看$ convmv -f gbk -t utf-8 *.md --notest #直接转了 这个问题参考的这篇 java代码测试HTTP文件上传]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Git学习笔记]]></title>
     <url>%2F2018%2F04%2F11%2FGit%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[前言Git是一个开源的分布式的版本管理工具。Hexo依赖的nodejs肯定不能用一篇文章写，但是git作为一个代码管理工具，我觉得这一篇写足够了。所以以后不会再单独写git相关的文章，有需要记录的就像之前的hexo和markdown那样，都在这篇里面追加吧。 git的使用可以通过https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%91%BD%E4%BB%A4%E8%A1%8C学习，但是我使用git时可能就几个常用的操作，每次来这里翻看也麻烦，于是有了这篇。 笔记windows下安装git 下载合适版本 双击666 打开GitBash后发现这个太好了，由于其内置了mingw，里面几乎常用的linux命令都有了，下次再装windows系统的时候不再装gvim、putty、curl等乱七八糟的工具了，直接装git。 常用操作设置用户信息12$ git config --global user.name "John Doe"$ git config --global user.email johndoe@example.com 这一步应该是必须的，不然提交时不行。 帮助1$ git help 其实其他都是多余的，所有操作都能通过帮助解决 初始化仓库$ git init 添加及提交文件12$ git add *.c$ git commit -m &apos;说明&apos; 察看状态12$ git status$ git status -s #简要 忽略文件$ vim .gitignore 移出及移动文件12$ git rm test.txt$ git mv test.txt readme.md]]></content>
