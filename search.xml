@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Git学习笔记]]></title>
+    <url>%2F2018%2F04%2F11%2FGit%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[前言Git是一个开源的分布式的版本管理工具。Hexo依赖的nodejs肯定不能用一篇文章写，但是git作为一个代码管理工具，我觉得这一篇写足够了。所以以后不会再单独写git相关的文章，有需要记录的就像之前的hexo和markdown那样，都在这篇里面追加吧。 git的使用可以通过https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%91%BD%E4%BB%A4%E8%A1%8C学习，但是我使用git时可能就几个常用的操作，每次来这里翻看也麻烦，于是有了这篇。 笔记windows下安装git 下载合适版本 双击666 打开GitBash后发现这个太好了，由于其内置了mingw，里面几乎常用的linux命令都有了，下次再装windows系统的时候不再装gvim、putty、curl等乱七八糟的工具了，直接装git。 常用操作设置用户信息12$ git config --global user.name "John Doe"$ git config --global user.email johndoe@example.com 这一步应该是必须的，不然提交时不行。 帮助1$ git help 其实其他都是多余的，所有操作都能通过帮助解决 初始化仓库$ git init 添加及提交文件12$ git add *.c$ git commit -m &apos;说明&apos; 察看状态12$ git status$ git status -s #简要 忽略文件$ vim .gitignore 移出及移动文件12$ git rm test.txt$ git mv test.txt readme.md]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Markdown语法笔记]]></title>
     <url>%2F2018%2F04%2F10%2FMarkdown%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[标题123456# H1## H2### H3#### H4##### H5###### H6 列表无序列表123- li- li- li 有序列表1231. li1. li1. li 链接直接连接1&lt;https://lcyasdlcy.github.io/&gt; 隐藏连接地址1[我的博客](https://lcyasdlcy.github.io/) 图片链接1![一张图片](https://lcyasdlcy.github.io/1.jpg) 引用123&gt; 引用1&gt; 引用2&gt; 引用3 强调粗体 **粗体**斜体 *斜体*删除 ~~删除~~分割线--- 表格 left center right 1 2 3 4 5 6 1234left|center|right-----|:---:|----:1|2|34|5|6]]></content>
