@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[java通过jni调用c入门]]></title>
+    <url>%2F2018%2F04%2F23%2Fjava-call-c-by-jni%2F</url>
+    <content type="text"><![CDATA[JNI（Java Native Interface）是java平台的一部分，它允许java和其他语言写的代码交互。本篇记录java调用c函数的过程，通过一个helloworld程序说明在不同平台下是如何实现java调用c的。 过程记录编写java本地接口直接上代码：123public class HelloJni &#123; public native void sayHello();&#125; 如果要将一个方法作为本地方法，必须声明该方法为native，且不能实现。编译：javac HelloJni 编写本地接口的实现通过上述操作会生成一个HelloJni.h头文件，内容就不贴上来了。下面是本地接口的c语言实现：12345678/*HelloJniImpl.c*/#include &lt;jni.h&gt;#include "HelloJni.h"JNIEXPORT void JNICALLJava_HelloJni_sayHello(JNIEnv *env, jobject obj)&#123; printf("hello, world.\n");&#125; 生成动态库不同系统的不同编译环境下，生成动态库的方式是不一样的，下面记录几种常用的方式。 windows下用vc生成进入cmd执行命令：1&gt; cl -I%java_home%\include -I%java_home%\include\win32 -LD HelloJni.c -Fehello.dll 生成hello.dll动态库文件，供java本地调用。 windows下用mingw生成进入GitBash执行命令：1$ gcc -Wall -D_JNI_IMPLEMENTATION_ -Wl,--kill-at -I/c/Java/jdk/include -I/c/java/jdk/include/win32 -shared -o hello.dll HelloJni.c 其中-Wall -D_JNI_IMPLEMENTATION_不是必须的，但-Wl,--kill-at是必须的，否则生成的dll无法被java调用。 linux下生成linux下就相对简单一些，跟普通的动态库生成没有区别，上命令：1$ gcc -I$&#123;JAVA_HOME&#125;/include -I$&#123;JAVA_HOME&#125;/include/linux -fPIC -shared -o libhello.so HelloJni.c 注意linux下java根据动态库名字找的时候会拼上前缀lib，所以为了测试代码一致，直接生成libhello.so文件。 编写java测试程序直接上代码：123456789public class HelloWorld &#123; static &#123; System.loadLibrary("hello"); &#125; public static void main(String[] args) &#123; HelloJni hj = new HelloJni(); hj.sayHello(); &#125;&#125; 使用static块加载相应名称的动态库。12$ javac HelloWorld #编译$ java HelloWorld #测试运行 我的环境是64位win7，开始用的是64位jdk，但编译动态库用的是32位mingw，这样运行测试时提示64位环境不能调用32位动态库。换成32位jdk就好了。 另外，windows下是会在程序运行目录下自动寻找动态库，但linux下不会自动寻找程序当前目录，我一般的做法是export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.，这样做是为了让程序也找当前目录。 其他这篇文章是一个java调用c函数的入门，实际用途不大，例如调用的函数sayHello既没有返回值也没有参数，我们编写代码时一般不会写这样的函数。这就涉及到了相关数据类型的对应及转换问题。等再写一篇介绍吧。]]></content>
+      <categories>
+        <category>Jni</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>c</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[windows下qt开发环境搭建]]></title>
     <url>%2F2018%2F04%2F23%2Fwin7-qt-env-setup%2F</url>
     <content type="text"><![CDATA[Qt开发可以直接命令行进行，一般步骤是：写代码、编写工程文件.pro、qmake、make。对于习惯了vs、eclipse这样的IDE工具的开发人员，就必要用到qtcreator了。平时linux下用桌面环境很少，那么这篇介绍一下windows下如何搭建qt的IDE开发环境。 环境准备下面是我的环境 操作系统：windows7 64位 调试器：gdb-7.5-i686_WinXP.zip 编译器：MinGW-gcc440_1.zip QtCreator: qt-creator-opensource-windows-x86-4.0.3.exe Qt：qt-win-opensource-4.8.5-mingw.exe 搭建过程下面是我的qt开发环境搭建过程，我按如下顺序来的（不知道其他顺序行不）： 解压gdb-7.5-i686_WinXP.zip到c:\Qt\gdb-7.5-i686_WinXP 解压MinGW-gcc440_1.zip到c:\Qt\mingw 设置环境变量set path=%path%;c:\Qt\mingw\bin 安装qt-creator，路径是C:\Qt\qtcreator-4.0.3 安装qt，路径是C:\Qt\4.8.5，选择mingwc:\Qt\mingw 配置环境 选择菜单工具/选项/构建和运行/qt版本/，添加qmake路径c:/Qt/4.8.5/bin/qmake.exe 编译器路径经过如上步骤后应该能自动检测到，如果没有可以手动添加，选择菜单工具/选项/构建和运行/编译器，添加编译器路径C:\Qt\mingw\bin\g++.exe 不使用自动发现的调试器，手动添加工具/选项/构建和运行/Debuggers，添加调试器路径C:\Qt\gdb-7.5-i686_WinXP\gdb-i686-pc-mingw32.exe CMake选择C:\Qt\qtcreator-4.0.3\bin\jom.exe，据说可以提高编译速度 在构建套件中添加新套件，选择相应的编译器、调试器、qt版本、CMake Tool等 测试常用操作 vi编辑方式alt+vv，左手拇指按住alt键然后连按两次v键]]></content>
