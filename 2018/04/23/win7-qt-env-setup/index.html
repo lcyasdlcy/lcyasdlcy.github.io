@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;s博客">
 <meta property="og:description" content="Qt开发可以直接命令行进行，一般步骤是：写代码、编写工程文件.pro、qmake、make。对于习惯了vs、eclipse这样的IDE工具的开发人员，就必要用到qtcreator了。平时linux下用桌面环境很少，那么这篇介绍一下windows下如何搭建qt的IDE开发环境。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-23T03:13:46.365Z">
+<meta property="og:updated_time" content="2018-04-23T03:16:35.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows下qt开发环境搭建">
 <meta name="twitter:description" content="Qt开发可以直接命令行进行，一般步骤是：写代码、编写工程文件.pro、qmake、make。对于习惯了vs、eclipse这样的IDE工具的开发人员，就必要用到qtcreator了。平时linux下用桌面环境很少，那么这篇介绍一下windows下如何搭建qt的IDE开发环境。">
@@ -400,7 +400,9 @@
 <li>解压gdb-7.5-i686_WinXP.zip到c:\Qt\gdb-7.5-i686_WinXP</li>
 <li>解压MinGW-gcc440_1.zip到c:\Qt\mingw</li>
 <li>设置环境变量<code>set path=%path%;c:\Qt\mingw\bin</code></li>
-<li>安装qt-creator，路径是C:\Qt\qtcreator-4.0.3<br>5: 安装qt，路径是C:\Qt\4.8.5，选择mingw<code>c:\Qt\mingw</code><br>6: 配置环境<ol>
+<li>安装qt-creator，路径是C:\Qt\qtcreator-4.0.3</li>
+<li>安装qt，路径是C:\Qt\4.8.5，选择mingw<code>c:\Qt\mingw</code></li>
+<li>配置环境<ol>
 <li>选择菜单<code>工具/选项/构建和运行/qt版本/</code>，添加qmake路径<code>c:/Qt/4.8.5/bin/qmake.exe</code></li>
 <li>编译器路径经过如上步骤后应该能自动检测到，如果没有可以手动添加，选择菜单<code>工具/选项/构建和运行/编译器</code>，添加编译器路径<code>C:\Qt\mingw\bin\g++.exe</code></li>
 <li>不使用自动发现的调试器，手动添加<code>工具/选项/构建和运行/Debuggers</code>，添加调试器路径<code>C:\Qt\gdb-7.5-i686_WinXP\gdb-i686-pc-mingw32.exe</code></li>
