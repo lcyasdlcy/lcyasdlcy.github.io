@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="JNI（Java Native Interface）是java平台的一部分，它允许java和其他语言写的代码交互。本篇记录java调用c函数的过程，通过一个helloworld程序说明在不同平台下是如何实现java调用c的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-24T00:42:00.577Z">
+<meta property="og:updated_time" content="2018-04-24T07:06:37.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java通过jni调用c入门">
 <meta name="twitter:description" content="JNI（Java Native Interface）是java平台的一部分，它允许java和其他语言写的代码交互。本篇记录java调用c函数的过程，通过一个helloworld程序说明在不同平台下是如何实现java调用c的。">
@@ -401,7 +401,7 @@
 <p><strong>使用static块加载相应名称的动态库。</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javac HelloWorld <span class="comment">#编译</span></span><br><span class="line">$ java HelloWorld <span class="comment">#测试运行</span></span><br></pre></td></tr></table></figure></p>
 <p><strong><em>我的环境是64位win7，开始用的是64位jdk，但编译动态库用的是32位mingw，这样运行测试时提示64位环境不能调用32位动态库。换成32位jdk就好了。</em></strong></p>
 <p><strong><em>另外，windows下是会在程序运行目录下自动寻找动态库，但linux下不会自动寻找程序当前目录，我一般的做法是<code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.</code>，这样做是为了让程序也找当前目录。</em></strong></p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>这篇文章是一个java调用c函数的入门，实际用途不大，例如调用的函数<code>sayHello</code>既没有返回值也没有参数，我们编写代码时一般不会写这样的函数。这就涉及到了相关数据类型的对应及转换问题。等再写一篇介绍吧。这里先贴上基本数据类型的对应关系。</strong><br>|java|jni|c|<br>|:—|:—|:—|<br>|boolean|jboolean|unsigned char|<br>|byte|jbyte|char|<br>|char|jchar|unsigned short|<br>|short|jshort|short|<br>|int|jint|long|<br>|long|jlong|__int64|<br>|float|jfloat|float|<br>|double|jdouble|double|</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>这篇文章是一个java调用c函数的入门，实际用途不大，例如调用的函数<code>sayHello</code>既没有返回值也没有参数，我们编写代码时一般不会写这样的函数。这就涉及到了相关数据类型的对应及转换问题。等再写一篇介绍吧。这里先贴上基本数据类型的对应关系。</strong><br>java|jni|c<br>:—|:—|:—<br>boolean|jboolean|unsigned char<br>byte|jbyte|char<br>char|jchar|unsigned short<br>short|jshort|short<br>int|jint|long<br>long|jlong|__int64<br>float|jfloat|float<br>double|jdouble|double</p>
 
       
     </div>
@@ -443,6 +443,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/24/jni-operate-java-object/" rel="prev" title="Jni操作Java对象">
+                Jni操作Java对象 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -523,7 +527,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
