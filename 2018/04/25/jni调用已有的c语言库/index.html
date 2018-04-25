@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,c," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="平时进行文件传输的时候一般首先想到的是搭建文件传输服务器（这里不讨论微信QQ飞鸽），常见的文件传输服务器一般是ftp、http、samba。windows下一般就是登陆上相关服务器Ctrl-C或者右键另存为，但是习惯了linux命令行操作后会想到wget和curl，这里要说的是curl，因为最近写代码时用到了libcurl，再就是wget好像只能下载用。">
+<meta name="description" content="上一篇写了jni如何操作java对象，但是实际应用中一般不会这样干。我们使用jni的主要用途是调用现成的c语言好的动态库或静态库，那本文以linux下的c语言库为例子，介绍一下jni如何调用已经写好的c语言库。">
+<meta name="keywords" content="java,c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="curl入门教程">
-<meta property="og:url" content="http://yoursite.com/2018/04/12/curl-primer/index.html">
+<meta property="og:title" content="jni调用已有的c语言库">
+<meta property="og:url" content="http://yoursite.com/2018/04/25/jni调用已有的c语言库/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
-<meta property="og:description" content="平时进行文件传输的时候一般首先想到的是搭建文件传输服务器（这里不讨论微信QQ飞鸽），常见的文件传输服务器一般是ftp、http、samba。windows下一般就是登陆上相关服务器Ctrl-C或者右键另存为，但是习惯了linux命令行操作后会想到wget和curl，这里要说的是curl，因为最近写代码时用到了libcurl，再就是wget好像只能下载用。">
+<meta property="og:description" content="上一篇写了jni如何操作java对象，但是实际应用中一般不会这样干。我们使用jni的主要用途是调用现成的c语言好的动态库或静态库，那本文以linux下的c语言库为例子，介绍一下jni如何调用已经写好的c语言库。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T08:21:05.396Z">
+<meta property="og:updated_time" content="2018-04-25T09:44:09.226Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="curl入门教程">
-<meta name="twitter:description" content="平时进行文件传输的时候一般首先想到的是搭建文件传输服务器（这里不讨论微信QQ飞鸽），常见的文件传输服务器一般是ftp、http、samba。windows下一般就是登陆上相关服务器Ctrl-C或者右键另存为，但是习惯了linux命令行操作后会想到wget和curl，这里要说的是curl，因为最近写代码时用到了libcurl，再就是wget好像只能下载用。">
+<meta name="twitter:title" content="jni调用已有的c语言库">
+<meta name="twitter:description" content="上一篇写了jni如何操作java对象，但是实际应用中一般不会这样干。我们使用jni的主要用途是调用现成的c语言好的动态库或静态库，那本文以linux下的c语言库为例子，介绍一下jni如何调用已经写好的c语言库。">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/12/curl-primer/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/25/jni调用已有的c语言库/"/>
 
 
 
 
 
-  <title>curl入门教程 | LCY'sBlog</title>
+  <title>jni调用已有的c语言库 | LCY'sBlog</title>
   
 
 
@@ -296,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/12/curl-primer/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/25/jni调用已有的c语言库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lcy">
@@ -313,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">curl入门教程</h1>
+          <h1 class="post-title" itemprop="name headline">jni调用已有的c语言库</h1>
         
 
         <div class="post-meta">
@@ -325,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T14:14:30+08:00">
-                2018-04-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T16:49:43+08:00">
+                2018-04-25
               </time>
             
 
@@ -348,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Curl/" itemprop="url" rel="index">
-                    <span itemprop="name">Curl</span>
+                  <a href="/categories/Jni/" itemprop="url" rel="index">
+                    <span itemprop="name">Jni</span>
                   </a>
                 </span>
 
@@ -385,41 +386,47 @@
       
 
       
-        <p>平时进行文件传输的时候一般首先想到的是搭建文件传输服务器（<em>这里不讨论微信QQ飞鸽</em>），常见的文件传输服务器一般是ftp、http、samba。windows下一般就是登陆上相关服务器<code>Ctrl-C</code>或者<code>右键另存为</code>，但是习惯了linux命令行操作后会想到<code>wget</code>和<code>curl</code>，这里要说的是curl，因为最近写代码时用到了libcurl，再就是wget好像只能下载用。<br><a id="more"></a></p>
-<h2 id="curl命令用法"><a href="#curl命令用法" class="headerlink" title="curl命令用法"></a>curl命令用法</h2><p>Curl作为数据传输工具强到令人发指，下面先引用两段：</p>
+        <p>上一篇写了jni如何操作java对象，但是实际应用中一般不会这样干。我们使用jni的主要用途是调用现成的c语言好的动态库或静态库，那本文以linux下的c语言库为例子，介绍一下jni如何调用已经写好的c语言库。<br><a id="more"></a></p>
+<h2 id="c语言库"><a href="#c语言库" class="headerlink" title="c语言库"></a>c语言库</h2><p>下面是一个c语言库的例子，直接贴代码。</p>
 <blockquote>
-<p>curl是利用URL语法在命令行方式下工作的开源文件传输工具。它被广泛应用在Unix、多种Linux发行版中，并且有DOS和Win32、Win64下的移植版本。<a href="https://baike.baidu.com/item/curl/10098606" target="_blank" rel="noopener">百度百科</a><br>curl命令是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称curl为下载工具。作为一款强力工具，curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl可以祝一臂之力。<a href="http://man.linuxde.net/curl" target="_blank" rel="noopener">linux命令大全</a></p>
+<p>mystr.h<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_str</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">get_info</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">hello</span><span class="params">(<span class="keyword">char</span> *name)</span></span>;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<p><strong>curl命令的使用方法就参考上面提到的两篇文章吧。下面记录一下在微服务大行其道的今天如何用curl进行RESTful接口调用</strong></p>
-<h2 id="测试REST接口"><a href="#测试REST接口" class="headerlink" title="测试REST接口"></a>测试REST接口</h2><p>请求方法为get：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -X GET -i &apos;http://localhost/person?id=1&apos;</span><br></pre></td></tr></table></figure></p>
-<p>请求方法为post：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -i &apos;http://localhost/person?id=1&apos;</span><br></pre></td></tr></table></figure></p>
-<p>带post字段的请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -i http://localhost/person --data &apos;name=aaa&amp;age=33&apos;</span><br></pre></td></tr></table></figure></p>
-<p>带http头字段的请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H &apos;Content-Type: application/json&apos; -i http://localhost/person --data &apos;&#123;name:&quot;aaa&quot;,age:33,children:[&quot;x&quot;,&quot;y&quot;,&quot;z&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure></p>
-<p><strong>这些命令用做测试REST足够了，但是要在程序中调用就要用到libcurl了</strong></p>
-<h2 id="windows下编译curl"><a href="#windows下编译curl" class="headerlink" title="windows下编译curl"></a>windows下编译curl</h2><p><a href="https://www.jianshu.com/p/d64b88b8fa17" target="_blank" rel="noopener">我写在简书上的文章</a></p>
-<p><strong>下载</strong><br>curl目前最新版本是<a href="https://curl.haxx.se/download/curl-7.59.0.zip" target="_blank" rel="noopener">7.59.0</a>，要下载其他版本的可以到<a href="https://curl.haxx.se/download/?C=M;O=D" target="_blank" rel="noopener">https://curl.haxx.se/download/?C=M;O=D</a></p>
-<h3 id="vc编译"><a href="#vc编译" class="headerlink" title="vc编译"></a>vc编译</h3><p>我的开发环境是vs2008，对应vc9，在源码<code>curl-7.59.0\projects\Windows\VC9</code>目录下有相关工程文件，用vs2008打开就能编译，这里不写了。</p>
-<p>命令行编译方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd curl-7.59.0/winbuild</span><br><span class="line">$ nmake /f Makefile.vc mode=static vc=9 ENABLE_IDN=no debug=no</span><br></pre></td></tr></table></figure></p>
-<p>成功后在<code>curl-7.59.0/builds/libcurl-vc9-x86-release-static-ipv6-sspi-winssl</code>产生相关文件。</p>
-<p>测试curl，<code>curl http://www.baidu.com</code></p>
-<p><strong>测试libcurl：</strong></p>
-<ol>
-<li>用vs2008建立vc工程，编写测试代码</li>
-<li>引入<code>libcurl_a.lib</code></li>
-<li>增加宏定义<code>CURL_STATICLIB</code></li>
-<li>修改运行时库<code>/md</code></li>
-</ol>
-<p><a href="https://curl.haxx.se/libcurl/c/example.html" target="_blank" rel="noopener">更多例子代码</a></p>
-<h3 id="mingw编译libcurl"><a href="#mingw编译libcurl" class="headerlink" title="mingw编译libcurl"></a>mingw编译libcurl</h3><p>以前要单独安装mingw，现在有了git方便多了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">打开GitBash</span><br><span class="line">$ cd curl-7.59.0</span><br><span class="line">$ mingw32-make mingw32</span><br></pre></td></tr></table></figure></p>
-<p>完成后在lib目录下有3个文件，分别是：</p>
+<blockquote>
+<p>mystr.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mystr.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_str</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"中华人民共和国万岁，世界人民大团结万岁！\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">get_info</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> info[<span class="number">100</span>];</span><br><span class="line">	<span class="built_in">strcpy</span>(info, <span class="string">"我是中国人！"</span>);</span><br><span class="line">	<span class="keyword">return</span> info;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">hello</span><span class="params">(<span class="keyword">char</span> *name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *s = <span class="string">"你好啊，"</span>;</span><br><span class="line">	<span class="keyword">char</span> *buf = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(name)+<span class="built_in">strlen</span>(s)+<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">strcpy</span>(buf, s);</span><br><span class="line">	<span class="built_in">strcat</span>(buf, name);</span><br><span class="line">	<span class="keyword">return</span> buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>mynum.h<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_num1</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>mynum.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mynum.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_num1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>生成动态库</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -fPIC -c mystr.c mynum.c</span><br><span class="line">$ gcc -shared -o libtest3.so mystr.o mynum.o</span><br></pre></td></tr></table></figure></p>
+<p><em>这个是分解动作，可以合成一个命令，看后面的makefile怎么写吧。</em></p>
+<p><strong>生成静态库</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -c mystr.c mynum.c</span><br><span class="line">$ ar cr libtest3.a mystr.o mynum.o</span><br></pre></td></tr></table></figure></p>
+<p><em>这是两个不同的命令，ar其实就是把.o文件打包（解包命令是这样的：<code>ar -x libtest3.a</code>），但是这样打出来的.a文件是不能被jni调用的（我现在是不会）。</em><br><strong>什么样的静态库文件能被jni调用呢？还是看后面的makefile文件。</strong></p>
+<h2 id="Jni"><a href="#Jni" class="headerlink" title="Jni"></a>Jni</h2><p>直接贴代码。</p>
+<blockquote>
+<p>MyJni.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyJni</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">printStr</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">getNum1</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">getInfo</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">hello</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>MyJniImpl.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"MyJni.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mystr.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mynum.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line">JNIEXPORT <span class="keyword">void</span> JNICALL Java_MyJni_printStr</span><br><span class="line">(JNIEnv *e, jobject o)</span><br><span class="line">&#123;</span><br><span class="line">	print_str();</span><br><span class="line">&#125;</span><br><span class="line">JNIEXPORT jint JNICALL Java_MyJni_getNum1</span><br><span class="line">(JNIEnv *e, jobject o)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> get_num1();</span><br><span class="line">&#125;</span><br><span class="line">JNIEXPORT jstring JNICALL Java_MyJni_getInfo</span><br><span class="line">(JNIEnv *env, jobject obj)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">char</span> *info = get_info();</span><br><span class="line">	<span class="keyword">return</span> (*env)-&gt;NewStringUTF(env, info);</span><br><span class="line">&#125;</span><br><span class="line">JNIEXPORT jstring JNICALL Java_MyJni_hello</span><br><span class="line">(JNIEnv *env, jobject obj, jstring name)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">const</span> jbyte *strName = (*env)-&gt;GetStringUTFChars(env, name, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">char</span> *helloInfo = hello((<span class="keyword">char</span>*)strName);</span><br><span class="line">	(*env)-&gt;ReleaseStringUTFChars(env, name, strName);</span><br><span class="line">	jstring info = (*env)-&gt;NewStringUTF(env, helloInfo);</span><br><span class="line">	<span class="built_in">free</span>(helloInfo);</span><br><span class="line">	<span class="keyword">return</span> info;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>说明几点个人看法（不一定对）</strong></p>
 <ul>
-<li>libcurl.a 静态库</li>
-<li>libcurl.dll 动态库</li>
-<li>libcurldll.a 动态倒入库</li>
+<li>java只能加载jni动态库</li>
+<li>jni遵循自己的内存自己释放的原则，但是需要手动调用，所以写jni代码的时候应该<code>GetStringUTFChars</code>和<code>ReleaseStringUTFChars</code>要成对出现</li>
+<li>上面例子中故意没有遵循谁申请谁释放原则，在jni实现中调了free</li>
 </ul>
-<p><strong>测试一下</strong><a href="http://timothyqiu.com/archives/build-libcurl-with-mingw/" target="_blank" rel="noopener">抄来的</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -I../../include -L../../lib simple.c -lcurldll</span><br><span class="line">$ gcc -I../../include -L../../lib simple.c -DCURL_STATICLIB -lcurl -lws2_32 -lwldap32</span><br></pre></td></tr></table></figure></p>
-<h3 id="qt下使用libcurl"><a href="#qt下使用libcurl" class="headerlink" title="qt下使用libcurl"></a>qt下使用libcurl</h3><p>这是我qt工程文件修改的部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INCLUDEPATH += D:/aaa_lcy/tmp/my-curl/curl-7.59.0/include/curl</span><br><span class="line">LIBS += D:/aaa_lcy/tmp/my-curl/curl-7.59.0/lib/libcurl.a -lws2_32 -lwldap32</span><br><span class="line">DEFINES += CURL_STATICLIB</span><br></pre></td></tr></table></figure></p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong><em>linux下就不说了，mingw本身就是模拟linux</em></strong></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>直接贴代码。</p>
+<blockquote>
+<p>main.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mystr.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mynum.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	print_str();</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, get_num1());</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, get_info());</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, hello(<span class="string">"小明"</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>Main.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.loadLibrary(<span class="string">"myjni"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		MyJni mj = <span class="keyword">new</span> MyJni();</span><br><span class="line">		mj.printStr();</span><br><span class="line">		System.out.println(mj.getNum1());</span><br><span class="line">		System.out.println(mj.getInfo());</span><br><span class="line">		System.out.println(mj.hello(<span class="string">"小明"</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>正常情况这两个c和java的代码输出应该是一样的。</strong></p>
+<h2 id="makefile"><a href="#makefile" class="headerlink" title="makefile"></a>makefile</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">JDKHOME = <span class="variable">$(JAVA_HOME)</span></span><br><span class="line">JNIINC = -I<span class="variable">$(JDKHOME)</span>/<span class="keyword">include</span> -I<span class="variable">$(JDKHOME)</span>/<span class="keyword">include</span>/linux</span><br><span class="line"><span class="section">main: lib_a jni_lib</span></span><br><span class="line">	gcc main.c -L. -ltest3</span><br><span class="line">	javac Main.java</span><br><span class="line"><span class="section">lib_so:</span></span><br><span class="line">	gcc -fPIC -shared -o libtest3.so mystr.c mynum.c</span><br><span class="line"><span class="section">lib_a:</span></span><br><span class="line">	gcc -fPIC -c mystr.c mynum.c</span><br><span class="line">	ar cr libtest3.a mystr.o mynum.o</span><br><span class="line">	rm mystr.o mynum.o</span><br><span class="line"><span class="section">jni_h:</span></span><br><span class="line">	javac MyJni.java</span><br><span class="line">	javah MyJni</span><br><span class="line"><span class="section">jni_lib:</span></span><br><span class="line">	gcc <span class="variable">$(JNIINC)</span> -fPIC -shared  -o libmyjni.so MyJniImpl.c -L. -ltest3</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm *.class *.o a.out libmyjni.so libtest3.so libtest3.a</span><br></pre></td></tr></table></figure>
+<p><strong>把上面的main依赖的<code>lib_a</code>改成<code>lib_so</code>，可以分别测试jni调用c的静态库和动态库，如果不行就把静态库编译时也加上<code>-fPIC</code>重新编译下再说哦。因为别的我还不会(^o^)</strong></p>
 
       
     </div>
@@ -435,6 +442,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/c/" rel="tag"># c</a>
+          
+        </div>
+      
 
       
       
@@ -444,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/11/HTTP文件传输/" rel="next" title="HTTP文件传输">
-                <i class="fa fa-chevron-left"></i> HTTP文件传输
+              <a href="/2018/04/24/jni-operate-java-object/" rel="next" title="Jni操作Java对象">
+                <i class="fa fa-chevron-left"></i> Jni操作Java对象
               </a>
             
           </div>
@@ -453,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/13/rest-api-call-client/" rel="prev" title="REST接口调用客户端开发库例子">
-                REST接口调用客户端开发库例子 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -592,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#curl命令用法"><span class="nav-number">1.</span> <span class="nav-text">curl命令用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试REST接口"><span class="nav-number">2.</span> <span class="nav-text">测试REST接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows下编译curl"><span class="nav-number">3.</span> <span class="nav-text">windows下编译curl</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vc编译"><span class="nav-number">3.1.</span> <span class="nav-text">vc编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mingw编译libcurl"><span class="nav-number">3.2.</span> <span class="nav-text">mingw编译libcurl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qt下使用libcurl"><span class="nav-number">3.3.</span> <span class="nav-text">qt下使用libcurl</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#c语言库"><span class="nav-number">1.</span> <span class="nav-text">c语言库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jni"><span class="nav-number">2.</span> <span class="nav-text">Jni</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#makefile"><span class="nav-number">4.</span> <span class="nav-text">makefile</span></a></li></ol></div>
             
 
           </div>
