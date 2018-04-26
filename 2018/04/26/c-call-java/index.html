@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,c," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="LCY&#39;sBlog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+<meta name="description" content="在计算机世界里，有些事是java不能办到的，而没有事是c/c++不能办到的，例如操作硬件设备。所以java调用c/c++是常有的事，而无所不能的c应该不常调用java。但实际情况也不尽然，如android系统（linux系统包装了java界面）里有时会有c程序执行完某功能后要通知java界面。这篇就记录一下c如何调用java。">
+<meta name="keywords" content="java,c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言程序调用java代码">
+<meta property="og:url" content="http://yoursite.com/2018/04/26/c-call-java/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
+<meta property="og:description" content="在计算机世界里，有些事是java不能办到的，而没有事是c/c++不能办到的，例如操作硬件设备。所以java调用c/c++是常有的事，而无所不能的c应该不常调用java。但实际情况也不尽然，如android系统（linux系统包装了java界面）里有时会有c程序执行完某功能后要通知java界面。这篇就记录一下c如何调用java。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-26T06:43:03.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LCY&#39;sBlog">
+<meta name="twitter:title" content="C语言程序调用java代码">
+<meta name="twitter:description" content="在计算机世界里，有些事是java不能办到的，而没有事是c/c++不能办到的，例如操作硬件设备。所以java调用c/c++是常有的事，而无所不能的c应该不常调用java。但实际情况也不尽然，如android系统（linux系统包装了java界面）里有时会有c程序执行完某功能后要通知java界面。这篇就记录一下c如何调用java。">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/page/2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/26/c-call-java/"/>
 
 
 
 
 
-  <title>归档 | LCY'sBlog</title>
+  <title>C语言程序调用java代码 | LCY'sBlog</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,152 +283,194 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/c-call-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lcy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/drogba.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCY'sBlog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">C语言程序调用java代码</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T13:56:49+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 13 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jni/" itemprop="url" rel="index">
+                    <span itemprop="name">Jni</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/10/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-10T11:56:09+08:00"
-              content="2018-04-10" >
-          04-10
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/10/Hexo使用笔记/" itemprop="url">
-              
-                <span itemprop="name">Hexo使用笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-10T10:53:00+08:00"
-              content="2018-04-10" >
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/10/我在github上的第一篇博文/" itemprop="url">
-              
-                <span itemprop="name">我在github上的第一篇博文</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-10T08:43:38+08:00"
-              content="2018-04-10" >
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>在计算机世界里，有些事是java不能办到的，而没有事是c/c++不能办到的，例如操作硬件设备。所以java调用c/c++是常有的事，而无所不能的c应该不常调用java。但实际情况也不尽然，如android系统（linux系统包装了java界面）里有时会有c程序执行完某功能后要通知java界面。这篇就记录一下c如何调用java。<br><a id="more"></a><br>我这篇的代码基本都是抄的<a href="http://ju.outofmemory.cn/entry/154404" target="_blank" rel="noopener">这篇</a>，只是我简化修改了下，算是个笔记吧。</p>
+<h2 id="java代码"><a href="#java代码" class="headerlink" title="java代码"></a>java代码</h2><blockquote>
+<p>Person.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String staticInfo = <span class="string">"this is a person"</span>;</span><br><span class="line">	<span class="keyword">private</span> String name = <span class="string">"aaa"</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> age = <span class="number">20</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getStaticInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> staticInfo;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"aaa"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>我为了追求例子简单写了这样一个不规范的代码，先说说哪里不规范：</strong></p>
+<ul>
+<li>声明成员变量的时候直接赋值了；</li>
+<li>没写set方法；</li>
+<li>没写构造函数；<br><strong><em>这样写出来的java代码平时可能没什么不妥，但是如果通过jni操作它，可能就会出现各种问题，有的问题我这篇最后都不知道怎么解决。所以以后写java代码时一定要规范！</em></strong></li>
+</ul>
+<p>下面记录一个命令，用来查看java类签名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -private -s Person</span><br></pre></td></tr></table></figure></p>
+<h2 id="java调用java测试"><a href="#java调用java测试" class="headerlink" title="java调用java测试"></a>java调用java测试</h2><blockquote>
+<p>Main.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Person p = <span class="keyword">new</span> Person();</span><br><span class="line">		System.out.println(Person.getStaticInfo());</span><br><span class="line">		System.out.println(p.getName());</span><br><span class="line">		System.out.println(p.getAge());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>这里的java代码间的调用，确实没感觉出<code>Person.java</code>代码写的有何不妥。</strong></p>
+<h2 id="c调用java测试"><a href="#c调用java测试" class="headerlink" title="c调用java测试"></a>c调用java测试</h2><p>C调用java的测试代码是这样的：</p>
+<blockquote>
+<p>main.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"c call java test.\n"</span>);</span><br><span class="line">	JavaVM *jvm = <span class="number">0</span>;</span><br><span class="line">	JNIEnv *env = <span class="number">0</span>;</span><br><span class="line">	JavaVMInitArgs jvm_args;</span><br><span class="line">	JavaVMOption opt[<span class="number">1</span>];</span><br><span class="line">	opt[<span class="number">0</span>].optionString = <span class="string">"-Djava.class.path=."</span>;</span><br><span class="line">	<span class="built_in">memset</span>(&amp;jvm_args, <span class="number">0</span>, <span class="keyword">sizeof</span>(jvm_args));</span><br><span class="line">	jvm_args.version = JNI_VERSION_1_6;</span><br><span class="line">	jvm_args.nOptions = <span class="number">1</span>;</span><br><span class="line">	jvm_args.options = opt;</span><br><span class="line">	<span class="keyword">long</span> jvm_stat = JNI_CreateJavaVM(&amp;jvm, (<span class="keyword">void</span>**)&amp;env, &amp;jvm_args);</span><br><span class="line">	jclass cls = (*env)-&gt;FindClass(env, <span class="string">"Person"</span>);</span><br><span class="line">	jmethodID static_method = (*env)-&gt;GetStaticMethodID(env, cls, <span class="string">"getStaticInfo"</span>, <span class="string">"()Ljava/lang/String;"</span>);</span><br><span class="line">	jstring staticInfo = (jstring)(*env)-&gt;CallStaticObjectMethod(env, cls, static_method);</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *strInfo = (*env)-&gt;GetStringUTFChars(env, staticInfo, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, strInfo);</span><br><span class="line">	(*env)-&gt;ReleaseStringUTFChars(env, staticInfo, strInfo);</span><br><span class="line">	jobject person = (*env)-&gt;AllocObject(env, cls);</span><br><span class="line">	jmethodID get_name = (*env)-&gt;GetMethodID(env, cls, <span class="string">"getName"</span>, <span class="string">"()Ljava/lang/String;"</span>);</span><br><span class="line">	jstring name = (jstring)(*env)-&gt;CallObjectMethod(env, person, get_name);</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *strName = (*env)-&gt;GetStringUTFChars(env, name, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, strName);</span><br><span class="line">	(*env)-&gt;ReleaseStringUTFChars(env, name, strName);</span><br><span class="line">	jfieldID age_field = (*env)-&gt;GetFieldID(env, cls, <span class="string">"name"</span>, <span class="string">"I"</span>);</span><br><span class="line">	(*env)-&gt;SetIntField(env, person, age_field, <span class="number">33</span>);</span><br><span class="line">	jmethodID get_age = (*env)-&gt;GetMethodID(env, cls, <span class="string">"getAge"</span>, <span class="string">"()I"</span>);</span><br><span class="line">	jint age = (*env)-&gt;CallIntMethod(env, person, get_age);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%ld\n"</span>, age);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong><em>由于我的Person代码写的不正规，导致用c调用的时候有的问题现在也没解决，如上面代码中最后打印的<code>age</code>是0。如果是正规的java代码是好解决的。</em></strong></p>
+<h2 id="makefile"><a href="#makefile" class="headerlink" title="makefile"></a>makefile</h2><p><strong>java代码间调用是没必要写makefile的，但是c调用java的代码在编译运行的时候要设好几个地方，还是直接上一个makefile吧。</strong></p>
+<blockquote>
+<p>makefile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">JDKHOME = /opt/jdk1.7.0_79</span><br><span class="line">LIBJVM = $(JDKHOME)/jre/lib/amd64/server/libjvm.so</span><br><span class="line">INCS = -I$(JDKHOME)/include -I$(JDKHOME)/include/linux</span><br><span class="line"></span><br><span class="line">main:</span><br><span class="line">	gcc $(INCS) main.c $(LIBJVM) -Wl,-rpath=$(JDKHOME)/jre/lib/amd64/server </span><br><span class="line">	javac *.java</span><br><span class="line">clean:</span><br><span class="line">	rm a.out *.o *.class *.log</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/c/" rel="tag"># c</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/jni调用已有的c语言库/" rel="next" title="jni调用已有的c语言库">
+                <i class="fa fa-chevron-left"></i> jni调用已有的c语言库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -431,6 +478,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -451,8 +502,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -516,6 +576,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java代码"><span class="nav-number">1.</span> <span class="nav-text">java代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java调用java测试"><span class="nav-number">2.</span> <span class="nav-text">java调用java测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c调用java测试"><span class="nav-number">3.</span> <span class="nav-text">c调用java测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#makefile"><span class="nav-number">4.</span> <span class="nav-text">makefile</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -649,6 +725,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
