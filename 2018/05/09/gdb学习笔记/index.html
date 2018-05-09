@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="接连两篇笔记vim和makefile，vim可以看作是程序的编辑，makefile可以看作程序的编译，那么是时候再整一篇程序调试的文章了。linux下调试c/c++程序的命令是gdb，下面就记录一下gdb的常用操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-09T06:32:32.157Z">
+<meta property="og:updated_time" content="2018-05-09T06:38:25.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gdb学习笔记">
 <meta name="twitter:description" content="接连两篇笔记vim和makefile，vim可以看作是程序的编辑，makefile可以看作程序的编译，那么是时候再整一篇程序调试的文章了。linux下调试c/c++程序的命令是gdb，下面就记录一下gdb的常用操作。">
@@ -546,14 +546,12 @@
 </tr>
 </tbody>
 </table>
-<p>启动调试方法</p>
-<ul>
+<h2 id="启动调试方法"><a href="#启动调试方法" class="headerlink" title="启动调试方法"></a>启动调试方法</h2><ul>
 <li>gdb <program></program></li>
 <li>gdb <program> core</program></li>
 <li>gdb <program> <pid></pid></program></li>
 </ul>
-<p>调试core文件</p>
-<p>查看系统是否支持dump core功能：</p>
+<h2 id="调试core文件"><a href="#调试core文件" class="headerlink" title="调试core文件"></a>调试core文件</h2><p>查看系统是否支持dump core功能：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ulimit</span> -c</span><br><span class="line">或</span><br><span class="line">$ <span class="built_in">ulimit</span> -a</span><br></pre></td></tr></table></figure>
 <p>配置系统使其支持生成core：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ulimit</span> -c unlimited</span><br></pre></td></tr></table></figure>
@@ -738,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用调试命令"><span class="nav-number">1.</span> <span class="nav-text">常用调试命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用调试命令"><span class="nav-number">1.</span> <span class="nav-text">常用调试命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动调试方法"><span class="nav-number">2.</span> <span class="nav-text">启动调试方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试core文件"><span class="nav-number">3.</span> <span class="nav-text">调试core文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
