@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="linux下开发c/c++程序需要写makefile，makefile是用来组织和构建工程的。其实不只编写c/c++程序要写makefile，所有语言的开发都可以写makefile，甚至所有的事情都可以。本篇就简要记录下写makefile常用操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-09T06:32:55.734Z">
+<meta property="og:updated_time" content="2018-05-10T01:55:02.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="makefile学习笔记">
 <meta name="twitter:description" content="linux下开发c/c++程序需要写makefile，makefile是用来组织和构建工程的。其实不只编写c/c++程序要写makefile，所有语言的开发都可以写makefile，甚至所有的事情都可以。本篇就简要记录下写makefile常用操作。">
@@ -389,6 +389,7 @@
         <p>linux下开发c/c++程序需要写makefile，makefile是用来组织和构建工程的。其实不只编写c/c++程序要写makefile，所有语言的开发都可以写makefile，甚至所有的事情都可以。本篇就简要记录下写makefile常用操作。<br><a id="more"></a></p>
 <h2 id="make命令"><a href="#make命令" class="headerlink" title="make命令"></a>make命令</h2><p>执行命令<code>make</code>时会在当前目录下寻找名称为<code>makefile</code>或<code>Makefile</code>的文件去执行，要指定执行哪个文件，需要执行如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make -f Makefile.1</span><br></pre></td></tr></table></figure>
+<p>可以在运行make命令时定义变量，如：<code>make CFLAGS=-O2</code></p>
 <h2 id="编写规则"><a href="#编写规则" class="headerlink" title="编写规则"></a>编写规则</h2><h3 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h3><p>makefile由一组规则组成，每条规则的格式是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target ...: prerequisites ...</span><br><span class="line">	command</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
 <p>例如：</p>
@@ -559,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -570,7 +571,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -581,7 +582,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
