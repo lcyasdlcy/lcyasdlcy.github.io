@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[linux网络编程入门]]></title>
+    <url>%2F2018%2F05%2F22%2Flinux-network-programming-primer%2F</url>
+    <content type="text"><![CDATA[本篇介绍的内容虽为linux下的c语言socket网络编程模型，但是其在windows下一样适用。甚至不同的编程语言，如java、python等也适用，只是包装的更加友好一些而已。话不多说，开始记录。 网络基础下表是网络模型与协议的对应关系： OSI参考模型 TCP/IP参考模型 网络协议 应用层 应用层 Telnet/HTTP/FTP/TFTP/NFS/SMTP/SNMP等 表示层 会话层 传输层 传输层 TCP、UDP 网络层 网络层 ICMP、IP、IGMP等 数据链路层 链路层 Ethernet、Token Ring等 物理层]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[python入门之模块]]></title>
     <url>%2F2018%2F05%2F18%2Fpython%E5%85%A5%E9%97%A8%E4%B9%8B%E6%A8%A1%E5%9D%97%2F</url>
     <content type="text"><![CDATA[如果写一个简单的测试程序，现在的知识差不多了。但是如果写个复杂程序，需要多人协同作业，这时候就必须用到模块了。python中模块相当于java中的类路径，用法也很像；相当于c语言中的头文件。本篇记录一下python中如何使用模块。 模块概念基本都是抄的这里的。 对于一个复杂的功能，为了编写可维护的代码，我们把很多函数分组，分别放到不同的文件里，这样，每个文件包含的代码就相对较少，很多编程语言都采用这种组织代码的方式。 在Python中，一个.py文件就称之为一个模块（Module）。即一个文件被看作一个独立的模块，一个模块也可以被看做是一个文件。模块文件名字不能是数字开头。 使用模块可以避免函数名和变量名冲突。相同名字的函数和变量完全可以分别存在不同的模块中，因此，我们自己在编写模块时，不必考虑名字会与其他模块冲突。但是也要注意，尽量不要与内置函数名字冲突。 模块分三种： 内置模块：如sys, os, subprocess, time, json 等； 自定义模块：自定义模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。 开源模块：公开的第三方模块， 如 https://pypi.python.org/pypi 。可以使用pip install 安装。 在python解释器内执行help(&#39;modules&#39;)可以查看python所有的模块。 模块导入Python允许导入其它模块以实现代码重用，从而也实现了将独立的代码文件组织成更大的程序系统。模块是被导入的，但模块也可以导入和使用其他模块，这些模块可以用Python或其他编程语言写成。 在导入模块时只能使用模块名，而不是使用带.py后缀的模块文件名。 模块导入方式import语句，用于导入整个模块，如：12import sys,osimport random as rd from-import语句，用于导入指定模块的部分属性，如：123from socket import *from sys import pathfrom os import path as ospath 导入模块时到哪里查找？是在sys.path指定的目录下查找。 那是不是只要把路径加入sys.path了就能找了呢，并不是这样，还需要__init__.py文件。直接上个例子吧。 目录结构12345678910111213module-test/├── a│ ├── __init__.py│ └── m.py├── b│ ├── __init__.py│ └── m.py├── __init__.py├── m.py├── test│ ├── __init__.py│ └── test1.py└── test0.py 然后直接上各文件代码吧，自己感受一下啊。 __init__.py是空的。 m.py内容都一样，贴一个的代码：1print 'm' test0.py123import mimport a.mimport b.m test1.py12345678import sys,osfilepath = os.path.abspath(__file__)filedir = os.path.dirname(filepath)basedir = os.path.dirname(filedir)sys.path.append(basedir)import mimport a.mimport b.m 安装第三方模块 使用命令pip install 模块名 下载源码包使用命令python setup.py install 前面写的django就是个第三方模块，参考之前那篇。]]></content>
