@@ -9,9 +9,12 @@
       </categories>
   </entry>
   <entry>
-    <title></title>
+    <title><![CDATA[html模态弹出层简单实现例子]]></title>
     <url>%2F2018%2F05%2F25%2Fhtml%E6%A8%A1%E6%80%81%E5%BC%B9%E5%87%BA%E5%B1%82%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E4%BE%8B%E5%AD%90%2F</url>
     <content type="text"><![CDATA[模态框就是弹出后，在其取消掉前不再允许操作其他窗口。下面是一个简单的js实现的模态框例子。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;style&gt;#mask &#123; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); display: none;&#125;#diag &#123; background-color: pink; width: 200px; height: 100px; position: fixed; left: 50%; top: 30%; display: none;&#125;#close &#123; position: absolute; top: 5px; right: 5px;&#125;&lt;/style&gt;&lt;title&gt;实现模态弹出框&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;button id="btn_diag"&gt;弹出&lt;/button&gt;&lt;button id="btn_test"&gt;测试&lt;/button&gt;&lt;div id="mask"&gt;&lt;/div&gt;&lt;div id="diag"&gt; &lt;div id="close"&gt;X&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;script&gt;window.onload = function() &#123; var btn_diag = document.getElementById('btn_diag'); var btn_test = document.getElementById('btn_test'); var diag = document.getElementById('diag'); var mask = document.getElementById('mask'); var close = document.getElementById('close'); btn_diag.onclick = function() &#123; mask.style.display = 'block'; diag.style.display = 'block'; &#125; btn_test.onclick = function() &#123; alert(btn_test.innerText); &#125; close.onclick = function() &#123; mask.style.display = 'none'; diag.style.display = 'none'; &#125;&#125;&lt;/script&gt;&lt;/html&gt;]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[Javascript学习笔记]]></title>

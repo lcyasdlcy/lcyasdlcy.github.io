@@ -81,14 +81,14 @@
 
 <meta name="description" content="模态框就是弹出后，在其取消掉前不再允许操作其他窗口。下面是一个简单的js实现的模态框例子。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LCY&#39;sBlog">
+<meta property="og:title" content="html模态弹出层简单实现例子">
 <meta property="og:url" content="http://yoursite.com/2018/05/25/html模态弹出层简单实现例子/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="模态框就是弹出后，在其取消掉前不再允许操作其他窗口。下面是一个简单的js实现的模态框例子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-25T06:39:17.102Z">
+<meta property="og:updated_time" content="2018-05-25T06:55:22.446Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LCY&#39;sBlog">
+<meta name="twitter:title" content="html模态弹出层简单实现例子">
 <meta name="twitter:description" content="模态框就是弹出后，在其取消掉前不再允许操作其他窗口。下面是一个简单的js实现的模态框例子。">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> | LCY'sBlog</title>
+  <title>html模态弹出层简单实现例子 | LCY'sBlog</title>
   
 
 
@@ -313,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">html模态弹出层简单实现例子</h1>
         
 
         <div class="post-meta">
@@ -325,7 +325,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T14:39:17+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T14:40:40+08:00">
                 2018-05-25
               </time>
             
@@ -335,6 +335,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -363,8 +385,7 @@
       
 
       
-        <hr>
-<p>模态框就是弹出后，在其取消掉前不再允许操作其他窗口。下面是一个简单的js实现的模态框例子。<br><a id="more"></a></p>
+        <p>模态框就是弹出后，在其取消掉前不再允许操作其他窗口。下面是一个简单的js实现的模态框例子。<br><a id="more"></a></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">#mask &#123;</span></span><br><span class="line"><span class="undefined">	position: fixed;</span></span><br><span class="line"><span class="undefined">	top: 0;</span></span><br><span class="line"><span class="undefined">	left: 0;</span></span><br><span class="line"><span class="undefined">	width: 100%;</span></span><br><span class="line"><span class="undefined">	height: 100%;</span></span><br><span class="line"><span class="undefined">	background: rgba(0,0,0,0.2);</span></span><br><span class="line"><span class="undefined">	display: none;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined">#diag &#123;</span></span><br><span class="line"><span class="undefined">	background-color: pink;</span></span><br><span class="line"><span class="undefined">	width: 200px;</span></span><br><span class="line"><span class="undefined">	height: 100px;</span></span><br><span class="line"><span class="undefined">	position: fixed;</span></span><br><span class="line"><span class="undefined">	left: 50%;</span></span><br><span class="line"><span class="undefined">	top: 30%;</span></span><br><span class="line"><span class="undefined">	display: none;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined">#close &#123;</span></span><br><span class="line"><span class="undefined">	position: absolute;</span></span><br><span class="line"><span class="undefined">	top: 5px;</span></span><br><span class="line"><span class="undefined">	right: 5px;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>实现模态弹出框<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn_diag"</span>&gt;</span>弹出<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn_test"</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"mask"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"diag"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"close"</span>&gt;</span>X<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> btn_diag = <span class="built_in">document</span>.getElementById(<span class="string">'btn_diag'</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> btn_test = <span class="built_in">document</span>.getElementById(<span class="string">'btn_test'</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> diag = <span class="built_in">document</span>.getElementById(<span class="string">'diag'</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> mask = <span class="built_in">document</span>.getElementById(<span class="string">'mask'</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> close = <span class="built_in">document</span>.getElementById(<span class="string">'close'</span>);</span></span><br><span class="line"><span class="javascript">	btn_diag.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">		mask.style.display = <span class="string">'block'</span>;</span></span><br><span class="line"><span class="javascript">		diag.style.display = <span class="string">'block'</span>;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="javascript">	btn_test.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">		alert(btn_test.innerText);</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="javascript">	close.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">		mask.style.display = <span class="string">'none'</span>;</span></span><br><span class="line"><span class="javascript">		diag.style.display = <span class="string">'none'</span>;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
       
