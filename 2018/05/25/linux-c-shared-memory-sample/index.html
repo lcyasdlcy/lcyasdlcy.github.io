@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="c,笔记,linux," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="接连两篇笔记vim和makefile，vim可以看作是程序的编辑，makefile可以看作程序的编译，那么是时候再整一篇程序调试的文章了。linux下调试c/c++程序的命令是gdb，下面就记录一下gdb的常用操作。">
-<meta name="keywords" content="c,笔记,linux">
+<meta name="description" content="本文通过一个例子演示linux下c语言如何通过共享内存的方式进行进程间通信，这是一个生产者消费者的例子。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gdb学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/05/09/gdb学习笔记/index.html">
+<meta property="og:title" content="linux下c语言共享内存实例">
+<meta property="og:url" content="http://yoursite.com/2018/05/25/linux-c-shared-memory-sample/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
-<meta property="og:description" content="接连两篇笔记vim和makefile，vim可以看作是程序的编辑，makefile可以看作程序的编译，那么是时候再整一篇程序调试的文章了。linux下调试c/c++程序的命令是gdb，下面就记录一下gdb的常用操作。">
+<meta property="og:description" content="本文通过一个例子演示linux下c语言如何通过共享内存的方式进行进程间通信，这是一个生产者消费者的例子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-09T06:38:25.633Z">
+<meta property="og:updated_time" content="2018-05-25T06:01:41.036Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gdb学习笔记">
-<meta name="twitter:description" content="接连两篇笔记vim和makefile，vim可以看作是程序的编辑，makefile可以看作程序的编译，那么是时候再整一篇程序调试的文章了。linux下调试c/c++程序的命令是gdb，下面就记录一下gdb的常用操作。">
+<meta name="twitter:title" content="linux下c语言共享内存实例">
+<meta name="twitter:description" content="本文通过一个例子演示linux下c语言如何通过共享内存的方式进行进程间通信，这是一个生产者消费者的例子。">
 
 
 
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/09/gdb学习笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/25/linux-c-shared-memory-sample/"/>
 
 
 
 
 
-  <title>gdb学习笔记 | LCY'sBlog</title>
+  <title>linux下c语言共享内存实例 | LCY'sBlog</title>
   
 
 
@@ -297,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/gdb学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/linux-c-shared-memory-sample/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lcy">
@@ -314,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">gdb学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">linux下c语言共享内存实例</h1>
         
 
         <div class="post-meta">
@@ -326,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T14:14:19+08:00">
-                2018-05-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T13:52:00+08:00">
+                2018-05-25
               </time>
             
 
@@ -386,178 +385,12 @@
       
 
       
-        <p>接连两篇笔记vim和makefile，vim可以看作是程序的编辑，makefile可以看作程序的编译，那么是时候再整一篇程序调试的文章了。linux下调试c/c++程序的命令是gdb，下面就记录一下gdb的常用操作。<br><a id="more"></a></p>
-<h2 id="常用调试命令"><a href="#常用调试命令" class="headerlink" title="常用调试命令"></a>常用调试命令</h2><p>只有用<code>gcc -g</code>生成的程序才能调试。</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>backtrace(bt)</td>
-<td>查看堆栈</td>
-</tr>
-<tr>
-<td>finish</td>
-<td>运行完当前函数</td>
-</tr>
-<tr>
-<td>frame(f) 帧号</td>
-<td>选择栈帧</td>
-</tr>
-<tr>
-<td>info(i) locals</td>
-<td>查看当前栈帧局部变量值</td>
-</tr>
-<tr>
-<td>list(l) 行号</td>
-<td>列出源码</td>
-</tr>
-<tr>
-<td>next(n)</td>
-<td>执行下一行</td>
-</tr>
-<tr>
-<td>print(p)</td>
-<td>打印表达式的值</td>
-</tr>
-<tr>
-<td>quit(q)</td>
-<td>退出gdb调试环境</td>
-</tr>
-<tr>
-<td>set var</td>
-<td>修改变量的值</td>
-</tr>
-<tr>
-<td>start</td>
-<td>执行程序，在main的第一行语句前停下</td>
-</tr>
-<tr>
-<td>step(s)</td>
-<td>执行下一步（进入函数）</td>
-</tr>
-<tr>
-<td>kill</td>
-<td>终止正在调试的程序</td>
-</tr>
-<tr>
-<td>break(b) 行号</td>
-<td>断点</td>
-</tr>
-<tr>
-<td>break 函数名</td>
-<td>断点</td>
-</tr>
-<tr>
-<td>break 文件名:行号</td>
-<td>断点</td>
-</tr>
-<tr>
-<td>continue(c)</td>
-<td>从当前位置开始继续执行</td>
-</tr>
-<tr>
-<td>delete breakpoints 断点号</td>
-<td>删除断点</td>
-</tr>
-<tr>
-<td>display 变量名</td>
-<td>跟踪某个变量</td>
-</tr>
-<tr>
-<td>disable breakpoints 断点号</td>
-<td>禁用断点</td>
-</tr>
-<tr>
-<td>enable 断点号</td>
-<td>启用断点</td>
-</tr>
-<tr>
-<td>info(i) breakpoints</td>
-<td>查看断点</td>
-</tr>
-<tr>
-<td>run(r)</td>
-<td>重新运行程序</td>
-</tr>
-<tr>
-<td>undisplay 跟踪显示号</td>
-<td>取消跟踪</td>
-</tr>
-<tr>
-<td>watch</td>
-<td>设置观察点</td>
-</tr>
-<tr>
-<td>info(i) watchpoints</td>
-<td>查看观察点</td>
-</tr>
-<tr>
-<td>x</td>
-<td>x/7b input//从input变量处打印7个存储单元的内容</td>
-</tr>
-<tr>
-<td>shell cmd</td>
-<td>执行命令</td>
-</tr>
-<tr>
-<td>set args</td>
-<td>设置参数</td>
-</tr>
-<tr>
-<td>show args</td>
-<td>查看参数</td>
-</tr>
-<tr>
-<td>show paths</td>
-<td>查看程序运行路径</td>
-</tr>
-<tr>
-<td>set environment varname=val</td>
-<td>设置环境变量</td>
-</tr>
-<tr>
-<td>show environment varname</td>
-<td>查看环境变量</td>
-</tr>
-<tr>
-<td>cd</td>
-<td>切换目录</td>
-</tr>
-<tr>
-<td>pwd</td>
-<td>查看当前目录</td>
-</tr>
-<tr>
-<td>info program</td>
-<td>查看程序状态</td>
-</tr>
-<tr>
-<td>clear 行号n</td>
-<td>清除第n行上的断点</td>
-</tr>
-<tr>
-<td>help</td>
-<td>帮助</td>
-</tr>
-</tbody>
-</table>
-<h2 id="启动调试方法"><a href="#启动调试方法" class="headerlink" title="启动调试方法"></a>启动调试方法</h2><ul>
-<li>gdb <program></program></li>
-<li>gdb <program> core</program></li>
-<li>gdb <program> <pid></pid></program></li>
-</ul>
-<h2 id="调试core文件"><a href="#调试core文件" class="headerlink" title="调试core文件"></a>调试core文件</h2><p>查看系统是否支持dump core功能：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ulimit</span> -c</span><br><span class="line">或</span><br><span class="line">$ <span class="built_in">ulimit</span> -a</span><br></pre></td></tr></table></figure>
-<p>配置系统使其支持生成core：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ulimit</span> -c unlimited</span><br></pre></td></tr></table></figure>
-<p>gdb调试core文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gdb a.out my.core</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面就是个简单的入门，要想深入还是要上网搜。</p>
+        <p>本文通过一个例子演示linux下c语言如何通过共享内存的方式进行进程间通信，这是一个生产者消费者的例子。<br><a id="more"></a></p>
+<h2 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h2><p><strong>生产者</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> shm_id;</span><br><span class="line">        <span class="keyword">int</span> *share;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line">        srand(time(<span class="literal">NULL</span>));</span><br><span class="line">        shm_id = shmget(<span class="number">1234</span>, getpagesize(), IPC_CREAT);</span><br><span class="line">        <span class="keyword">if</span> (shm_id == <span class="number">-1</span>) &#123;</span><br><span class="line">                perror(<span class="string">"shmget()"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        share = (<span class="keyword">int</span> *)shmat(shm_id, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">                num = random() % <span class="number">1000</span>;</span><br><span class="line">                *share = num;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"write a random number %d\n"</span>, num);</span><br><span class="line">                sleep(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>消费者</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> shm_id;</span><br><span class="line">        <span class="keyword">int</span> *share;</span><br><span class="line">        shm_id = shmget(<span class="number">1234</span>, getpagesize(), IPC_CREAT);</span><br><span class="line">        share = (<span class="keyword">int</span> *)shmat(shm_id, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">                sleep(<span class="number">1</span>);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *share);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h2><p><strong>shm_com.h</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEXT_SZ 2048</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">shared_use_st</span> &#123;</span></span><br><span class="line">        <span class="keyword">int</span> written_by_you;</span><br><span class="line">        <span class="keyword">char</span> some_text[TEXT_SZ];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>consumer.c</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"shm_com.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> running = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">void</span> *shared_memory = (<span class="keyword">void</span> *)<span class="number">0</span>;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">shared_use_st</span> *<span class="title">shared_stuff</span>;</span></span><br><span class="line">        <span class="keyword">int</span> shmid;</span><br><span class="line">        srand((<span class="keyword">unsigned</span> <span class="keyword">int</span>)getpid());</span><br><span class="line">        shmid = shmget((<span class="keyword">key_t</span>)<span class="number">1234</span>, <span class="keyword">sizeof</span>(struct shared_use_st), <span class="number">0666</span>|IPC_CREAT);</span><br><span class="line">        <span class="keyword">if</span> (shmid == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"shmget failed\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        shared_memory = shmat(shmid, (<span class="keyword">void</span> *)<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (shared_memory == (<span class="keyword">void</span> *)<span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"shmat failed\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"memory attached at %X\n"</span>, (<span class="keyword">int</span>)shared_memory);</span><br><span class="line">        shared_stuff = (struct shared_use_st *)shared_memory;</span><br><span class="line">        shared_stuff-&gt;written_by_you = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (running) &#123;</span><br><span class="line">                <span class="keyword">if</span> (shared_stuff-&gt;written_by_you) &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"you wrote: %s"</span>, shared_stuff-&gt;some_text);</span><br><span class="line">                        sleep(rand() % <span class="number">4</span>);</span><br><span class="line">                        shared_stuff-&gt;written_by_you = <span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">if</span> (<span class="built_in">strncmp</span>(shared_stuff-&gt;some_text, <span class="string">"end"</span>, <span class="number">3</span>) == <span class="number">0</span>)</span><br><span class="line">                                running = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (shmdt(shared_memory) == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"shmdt failed\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (shmctl(shmid, IPC_RMID, <span class="number">0</span>) == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"shmctl(IPC_RMID) failed\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>producer.c</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"shm_com.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> running = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">void</span> *shared_memory = (<span class="keyword">void</span> *)<span class="number">0</span>;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">shared_use_st</span> *<span class="title">shared_stuff</span>;</span></span><br><span class="line">        <span class="keyword">char</span> buffer[BUFSIZ];</span><br><span class="line">        <span class="keyword">int</span> shmid;</span><br><span class="line">        shmid = shmget((<span class="keyword">key_t</span>)<span class="number">1234</span>, <span class="keyword">sizeof</span>(struct shared_use_st), <span class="number">0666</span>|IPC_CREAT);</span><br><span class="line">        <span class="keyword">if</span> (shmid == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"shmget failed\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        shared_memory = shmat(shmid, (<span class="keyword">void</span> *)<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (shared_memory == (<span class="keyword">void</span> *)<span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"shmat failed\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"memory attached at %X\n"</span>, (<span class="keyword">int</span>)shared_memory);</span><br><span class="line">        shared_stuff = (struct shared_use_st *)shared_memory;</span><br><span class="line">        <span class="keyword">while</span> (running) &#123;</span><br><span class="line">                <span class="keyword">while</span> (shared_stuff-&gt;written_by_you == <span class="number">1</span>) &#123;</span><br><span class="line">                        sleep(<span class="number">1</span>);</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"waiting for client...\n"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"enter some text: "</span>);</span><br><span class="line">                fgets(buffer, BUFSIZ, <span class="built_in">stdin</span>);</span><br><span class="line">                <span class="built_in">strncpy</span>(shared_stuff-&gt;some_text, buffer, TEXT_SZ);</span><br><span class="line">                shared_stuff-&gt;written_by_you = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">strncmp</span>(buffer, <span class="string">"end"</span>, <span class="number">3</span>) == <span class="number">0</span>)</span><br><span class="line">                        running = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (shmdt(shared_memory) == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"shmdt failed\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -573,16 +406,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/c/" rel="tag"># c</a>
-          
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
-          
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
-        </div>
-      
 
       
       
@@ -592,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/09/makefile学习笔记/" rel="next" title="makefile学习笔记">
-                <i class="fa fa-chevron-left"></i> makefile学习笔记
+              <a href="/2018/05/25/linux-c-thread-sample/" rel="next" title="linux下c语言多线程实例">
+                <i class="fa fa-chevron-left"></i> linux下c语言多线程实例
               </a>
             
           </div>
@@ -602,8 +425,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/10/socket简单实例的不同语言实现/" rel="prev" title="socket简单实例的不同语言实现">
-                socket简单实例的不同语言实现 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/25/qt4使用QFtp实现ftp文件同步下载实例/" rel="prev" title="qt4使用QFtp实现ftp文件同步下载实例">
+                qt4使用QFtp实现ftp文件同步下载实例 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -740,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用调试命令"><span class="nav-number">1.</span> <span class="nav-text">常用调试命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动调试方法"><span class="nav-number">2.</span> <span class="nav-text">启动调试方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试core文件"><span class="nav-number">3.</span> <span class="nav-text">调试core文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例1"><span class="nav-number">1.</span> <span class="nav-text">实例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例2"><span class="nav-number">2.</span> <span class="nav-text">实例2</span></a></li></ol></div>
             
 
           </div>
