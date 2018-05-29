@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="http,rest,curl,elk," />
+  <meta name="keywords" content="http,rest,json,curl,elk," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="先申明，这篇文章的核心内容是抄自这篇，易百教程这个网站上好多很好的学习资料。这篇想借着学习Elasticsearch的机会顺便再理解下RESTful、学习一下curl的使用。好了，进入正文吧。">
-<meta name="keywords" content="http,rest,curl,elk">
+<meta name="keywords" content="http,rest,json,curl,elk">
 <meta property="og:type" content="article">
 <meta property="og:title" content="elasticsearch入门">
 <meta property="og:url" content="http://yoursite.com/2018/05/29/elasticsearch-primer/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="先申明，这篇文章的核心内容是抄自这篇，易百教程这个网站上好多很好的学习资料。这篇想借着学习Elasticsearch的机会顺便再理解下RESTful、学习一下curl的使用。好了，进入正文吧。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-29T07:38:48.713Z">
+<meta property="og:updated_time" content="2018-05-29T08:58:51.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch入门">
 <meta name="twitter:description" content="先申明，这篇文章的核心内容是抄自这篇，易百教程这个网站上好多很好的学习资料。这篇想借着学习Elasticsearch的机会顺便再理解下RESTful、学习一下curl的使用。好了，进入正文吧。">
@@ -410,12 +410,62 @@
 <li>GET：查询资源</li>
 </ul>
 <p>接下来，就通过curl工具进行RESTful操作Elasticsearch，简单学习之。</p>
-<h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><h3 id="下载安装配置运行"><a href="#下载安装配置运行" class="headerlink" title="下载安装配置运行"></a>下载安装配置运行</h3><p>到<a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">https://www.elastic.co/cn/</a>这个网站上下载。</p>
+<h2 id="下载安装配置运行"><a href="#下载安装配置运行" class="headerlink" title="下载安装配置运行"></a>下载安装配置运行</h2><p>到<a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">https://www.elastic.co/cn/</a>这个网站上下载。</p>
 <p>下载完成后解压缩就能用了，不用安装。</p>
 <p>默认不需要修改配置，如果要修改配置怎么办，例如默认的9200端口已经被其他程序占用了。这时要到Elasticsearch主目录下的<code>config/elasticsearch.yml</code>下修改如下：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http.port:</span> <span class="number">9300</span></span><br></pre></td></tr></table></figure></p>
 <p>其他如修改数据过期时间等都是都在这里，这里不试了，直接采用默认。</p>
 <p>运行就是到bin目录下执行elasticsearch命令就可以了。因为是Java开发的，所以需要java环境，最好是1.8的。</p>
-
+<h2 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h2><p><code>CRUD</code>是什么？就是前面说的<code>增删改查</code>的简写：create/retrive/update/delete。以后CRUD这个说法会经常出现。</p>
+<h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><p>这里不自己理解了，直接引用：</p>
+<blockquote>
+<p>在ElasticSearch索引中，对应于CRUD中的“创建”和“更新” - 如果对具有给定类型的文档进行索引，并且要插入原先不存在的ID。 如果具有相同类型和ID的文档已存在，则会被覆盖。<br>要索引第一个JSON对象，我们对REST API创建一个PUT请求到一个由索引名称，类型名称和ID组成的URL。 也就是：<code>http://localhost:9200/&lt;index&gt;/&lt;type&gt;/[&lt;id&gt;]</code>。<br>索引和类型是必需的，而id部分是可选的。如果不指定ID，ElasticSearch会为我们生成一个ID。 但是，如果不指定id，应该使用HTTP的POST而不是PUT请求。<br>索引名称是任意的。如果服务器上没有此名称的索引，则将使用默认配置来创建一个索引。<br>至于类型名称，它也是任意的。 它有几个用途，包括：</p>
+<ul>
+<li>每种类型都有自己的ID空间。</li>
+<li>不同类型具有不同的映射(“模式”，定义属性/字段应如何编制索引)。</li>
+<li>搜索多种类型是可以的，并且也很常见，但很容易搜索一种或多种指定类型。</li>
+</ul>
+</blockquote>
+<p>举例，要创建一个索引，这里使用索引的名称为<code>movies</code>，类型名称(<code>movie</code>)和id(<code>1</code>)，并按照上述模式使用JSON对象在正文中进行请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT &quot;http://localhost:9200/movies/movie/1&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;title&quot;: &quot;The Godfather&quot;,</span><br><span class="line">    &quot;director&quot;: &quot;Francis Ford Coppola&quot;,</span><br><span class="line">    &quot;year&quot;: 1972</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="更新索引"><a href="#更新索引" class="headerlink" title="更新索引"></a>更新索引</h3><p>直接上curl操作的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT &quot;http://localhost:9200/movies/movie/1&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;title&quot;: &quot;The Godfather&quot;,</span><br><span class="line">    &quot;director&quot;: &quot;Francis Ford Coppola&quot;,</span><br><span class="line">    &quot;year&quot;: 1972,</span><br><span class="line">    &quot;genres&quot;: [&quot;Crime&quot;, &quot;Drama&quot;]</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure></p>
+<p>引用：</p>
+<blockquote>
+<p>ElasticSearch的响应结果与前面的大体上一样，但有一点区别，结果对象中的_version属性的值为2，而不是1。版本号(_version)可用于跟踪文档已编入索引的次数。它的主要目的是允许乐观的并发控制，因为可以在索引请求中提供一个版本，如果提供的版本高于索引中的版本，ElasticSearch将只覆盖文档内容，ID值不变，版本号自动添加。</p>
+</blockquote>
+<h3 id="由ID获取文档"><a href="#由ID获取文档" class="headerlink" title="由ID获取文档"></a>由ID获取文档</h3><p>简单的做法是向同一个URL发出一个GET请求，URL的ID部分是强制性的。通过ID从ElasticSearch中检索文档可发出URL的GET请求：<code>http://localhost:9200/&lt;index&gt;/&lt;type&gt;/&lt;id&gt;</code>。</p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET &quot;http://localhost:9200/movies/movie/1&quot; -d&apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>为了通过ID从索引中删除单个指定的文档，使用与获取索引文档相同的URL，只是这里将HTTP方法更改为DELETE。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XDELETE &quot;http://localhost:9200/movies/movie/1&quot; -d&apos;&apos;</span><br></pre></td></tr></table></figure>
+<p>响应对象包含元数据方面的一些常见数据字段，以及名为“_found”的属性，表示文档确实已找到并且操作成功。</p>
+<p>在执行DELETE调用后切换回GET，可以验证文档是否确实已删除。</p>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>搜索就是查询了。这是Elasticsearch的核心，因为人名字里就带<code>search</code>这个单词了。</p>
+<p>为了演示搜索，用curl再向Elasticsearch添加两条记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT <span class="string">"http://localhost:9200/movies/movie/2"</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "title": "To Kill a Mockingbird",</span></span><br><span class="line"><span class="string">    "director": "Robert Mulligan",</span></span><br><span class="line"><span class="string">    "year": 1962,</span></span><br><span class="line"><span class="string">    "genres": ["Crime", "Drama", "Mystery"]</span></span><br><span class="line"><span class="string">&#125;'</span></span><br><span class="line"></span><br><span class="line">curl -XPUT <span class="string">"http://localhost:9200/movies/movie/3"</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "title": "Kill Bill: Vol. 1",</span></span><br><span class="line"><span class="string">    "director": "Quentin Tarantino",</span></span><br><span class="line"><span class="string">    "year": 2003,</span></span><br><span class="line"><span class="string">    "genres": ["Action", "Crime", "Thriller"]</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
+<p>好了，现在把三部著名电影（教父、杀死比尔、杀死一只知更鸟）信息加入Elasticsearch了，开始练习搜索。</p>
+<p><strong>_search端点</strong></p>
+<p>又是直接引用： </p>
+<blockquote>
+<p>现在已经把一些电影信息放入了索引，可以通过搜索看看是否可找到它们。 为了使用ElasticSearch进行搜索，我们使用_search端点，可选择使用索引和类型。也就是说，按照以下模式向URL发出请求：<index>/<type>/_search。其中，index和type都是可选的。<br>换句话说，为了搜索电影，可以对以下任一URL进行POST请求：</type></index></p>
+<ul>
+<li><a href="http://localhost:9200/_search" target="_blank" rel="noopener">http://localhost:9200/_search</a> - 搜索所有索引和所有类型。</li>
+<li>ttp://localhost:9200/movies/_search - 在电影索引中搜索所有类型</li>
+<li>ttp://localhost:9200/movies/movie/_search - 在电影索引中显式搜索电影类型的文档。<br>因为我们只有一个单一的索引和单一的类型，所以怎么使用都不会有什么问题。为了简洁起见使用第一个URL。</li>
+</ul>
+</blockquote>
+<p><strong>搜索请求正文和ElasticSearch查询DSL</strong><br>DSL格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">        //Query DSL here</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>基本自由文本搜索</strong></p>
+<p>查询电影信息中带<code>kill</code>的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST &quot;http://localhost:9200/_search&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">        &quot;query_string&quot;: &#123;</span><br><span class="line">            &quot;query&quot;: &quot;kill&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure></p>
+<p>上面是DSL查询方式，看直接url传参数怎么查：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET &apos;localhost:9200/_search?q=kill&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong>指定搜索的字段</strong></p>
+<blockquote>
+<p>在前面的例子中，使用了一个非常简单的查询，一个只有一个属性“query”的查询字符串查询。 如前所述，查询字符串查询有一些可以指定设置，如果不使用，它将会使用默认的设置值。<br>这样的设置称为“fields”，可用于指定要搜索的字段列表。如果不使用“fields”字段，ElasticSearch查询将默认自动生成的名为“_all”的特殊字段，来基于所有文档中的各个字段匹配搜索。</p>
+</blockquote>
+<p>下面就查一个指定字段的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST &quot;http://localhost:9200/_search&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">        &quot;query_string&quot;: &#123;</span><br><span class="line">            &quot;query&quot;: &quot;kill&quot;,</span><br><span class="line">            &quot;fields&quot;: [&quot;title&quot;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure></p>
+<p>这个例子直接url传参数的查询是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET &apos;localhost:9200/_search?q=title:kill&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong>过滤查询</strong></p>
+<p>直接上个例子，剩下的还是看原文吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST &quot;http://localhost:9200/_search&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">        &quot;filtered&quot;: &#123;</span><br><span class="line">            &quot;query&quot;: &#123;</span><br><span class="line">                &quot;query_string&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;drama&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;term&quot;: &#123; &quot;year&quot;: 1962 &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="ELK入门"><a href="#ELK入门" class="headerlink" title="ELK入门"></a>ELK入门</h2>
       
     </div>
     
@@ -435,6 +485,8 @@
             <a href="/tags/http/" rel="tag"># http</a>
           
             <a href="/tags/rest/" rel="tag"># rest</a>
+          
+            <a href="/tags/json/" rel="tag"># json</a>
           
             <a href="/tags/curl/" rel="tag"># curl</a>
           
@@ -562,7 +614,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -595,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTful"><span class="nav-number">2.</span> <span class="nav-text">RESTful</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入门教程"><span class="nav-number">3.</span> <span class="nav-text">入门教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装配置运行"><span class="nav-number">3.1.</span> <span class="nav-text">下载安装配置运行</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTful"><span class="nav-number">2.</span> <span class="nav-text">RESTful</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装配置运行"><span class="nav-number">3.</span> <span class="nav-text">下载安装配置运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRUD"><span class="nav-number">4.</span> <span class="nav-text">CRUD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建索引"><span class="nav-number">4.1.</span> <span class="nav-text">创建索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新索引"><span class="nav-number">4.2.</span> <span class="nav-text">更新索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由ID获取文档"><span class="nav-number">4.3.</span> <span class="nav-text">由ID获取文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文档"><span class="nav-number">4.4.</span> <span class="nav-text">删除文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">4.5.</span> <span class="nav-text">搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELK入门"><span class="nav-number">5.</span> <span class="nav-text">ELK入门</span></a></li></ol></div>
             
 
           </div>
