@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="http,rest,curl,elk," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="LCY&#39;sBlog">
-<meta property="og:url" content="http://yoursite.com/categories/linux-c/index.html">
+<meta name="description" content="先申明，这篇文章的核心内容是抄自这篇，易百教程这个网站上好多很好的学习资料。这篇想借着学习Elasticsearch的机会顺便再理解下RESTful、学习一下curl的使用。好了，进入正文吧。">
+<meta name="keywords" content="http,rest,curl,elk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="elasticsearch入门">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/elasticsearch-primer/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
+<meta property="og:description" content="先申明，这篇文章的核心内容是抄自这篇，易百教程这个网站上好多很好的学习资料。这篇想借着学习Elasticsearch的机会顺便再理解下RESTful、学习一下curl的使用。好了，进入正文吧。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-29T07:38:48.713Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LCY&#39;sBlog">
+<meta name="twitter:title" content="elasticsearch入门">
+<meta name="twitter:description" content="先申明，这篇文章的核心内容是抄自这篇，易百教程这个网站上好多很好的学习资料。这篇想借着学习Elasticsearch的机会顺便再理解下RESTful、学习一下curl的使用。好了，进入正文吧。">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/linux-c/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/29/elasticsearch-primer/"/>
 
 
 
 
 
-  <title>分类: linux.c | LCY'sBlog</title>
+  <title>elasticsearch入门 | LCY'sBlog</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,139 +283,203 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>linux.c<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/elasticsearch-primer/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lcy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/drogba.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCY'sBlog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/25/linux-c-shared-memory-sample/" itemprop="url">
-              
-                <span itemprop="name">linux下c语言共享内存实例</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">elasticsearch入门</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-25T13:52:00+08:00"
-              content="2018-05-25" >
-          05-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T14:40:19+08:00">
+                2018-05-29
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/25/linux-c-thread-sample/" itemprop="url">
-              
-                <span itemprop="name">linux下c语言多线程实例</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-25T13:37:01+08:00"
-              content="2018-05-25" >
-          05-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/09/gdb学习笔记/" itemprop="url">
-              
-                <span itemprop="name">gdb学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-09T14:14:19+08:00"
-              content="2018-05-09" >
-          05-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/09/makefile学习笔记/" itemprop="url">
-              
-                <span itemprop="name">makefile学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-09T13:18:29+08:00"
-              content="2018-05-09" >
-          05-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>先申明，这篇文章的核心内容是抄自<a href="https://www.yiibai.com/elasticsearch/elasticsearch-getting-start.html" target="_blank" rel="noopener">这篇</a>，<code>易百教程</code>这个网站上好多很好的学习资料。这篇想借着学习Elasticsearch的机会顺便再理解下RESTful、学习一下curl的使用。好了，进入正文吧。<br><a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Elasticsearch是一个高度可扩展的开源搜索引擎，它可以使用RESTful API访问，使用JSON来存储数据。它是用Java开发的。</p>
+<p>上面是从网上抄的，我作为初学者来说，先不管什么可扩展、分布式。Elasticsearch给我的第一印象就是一个类似MongoDB的非关系型数据库。下面先抄一个表，来对应一下关系型数据库中的相关概念：</p>
+<table>
+<thead>
+<tr>
+<th>Elasticsearch</th>
+<th>关系型数据库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>索引</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>碎片</td>
+<td>碎片</td>
+</tr>
+<tr>
+<td>映射</td>
+<td>表</td>
+</tr>
+<tr>
+<td>字段</td>
+<td>字段</td>
+</tr>
+<tr>
+<td>JSON对象</td>
+<td>元组</td>
+</tr>
+</tbody>
+</table>
+<p>既然Elasticsearch是一个数据库了，那就免不了<code>增、删、改、查</code>操作了，我们记住了，这里都是通过RESTful进行的。那么是时候了解一下RESTful了。</p>
+<h2 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h2><p>RESTful是什么，我是很难说清楚，直接引用百度百科上的一段话吧：</p>
+<blockquote>
+<p>一种软件架构风格、设计风格，而不是标准，只是提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。</p>
+</blockquote>
+<p>所以我感觉是什么不重要了，重要的是如何用。我的理解就是使用标准HTTP方法，进行与远程应用之间的数据交互，这点就类似于我们使用mysql客户端对mysql数据库进行增删改查操作，RESTful使用<code>POST、DELETE、PUT、GET</code>等方法进行数据的增删改查。好了，简单记一下每个方法的含义：</p>
+<ul>
+<li>POST：创建资源</li>
+<li>DELETE：删除资源</li>
+<li>PUT：更新资源（如果没有就创建）</li>
+<li>GET：查询资源</li>
+</ul>
+<p>接下来，就通过curl工具进行RESTful操作Elasticsearch，简单学习之。</p>
+<h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><h3 id="下载安装配置运行"><a href="#下载安装配置运行" class="headerlink" title="下载安装配置运行"></a>下载安装配置运行</h3><p>到<a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">https://www.elastic.co/cn/</a>这个网站上下载。</p>
+<p>下载完成后解压缩就能用了，不用安装。</p>
+<p>默认不需要修改配置，如果要修改配置怎么办，例如默认的9200端口已经被其他程序占用了。这时要到Elasticsearch主目录下的<code>config/elasticsearch.yml</code>下修改如下：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http.port:</span> <span class="number">9300</span></span><br></pre></td></tr></table></figure></p>
+<p>其他如修改数据过期时间等都是都在这里，这里不试了，直接采用默认。</p>
+<p>运行就是到bin目录下执行elasticsearch命令就可以了。因为是Java开发的，所以需要java环境，最好是1.8的。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+            <a href="/tags/rest/" rel="tag"># rest</a>
+          
+            <a href="/tags/curl/" rel="tag"># curl</a>
+          
+            <a href="/tags/elk/" rel="tag"># elk</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/25/javascript事件学习例子/" rel="next" title="javascript事件学习例子">
+                <i class="fa fa-chevron-left"></i> javascript事件学习例子
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -418,6 +487,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -438,8 +511,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -503,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTful"><span class="nav-number">2.</span> <span class="nav-text">RESTful</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入门教程"><span class="nav-number">3.</span> <span class="nav-text">入门教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装配置运行"><span class="nav-number">3.1.</span> <span class="nav-text">下载安装配置运行</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -636,6 +734,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

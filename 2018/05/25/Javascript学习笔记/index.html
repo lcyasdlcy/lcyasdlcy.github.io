@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="通过这篇文章不断记录js使用过程中遇到的问题解决方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-25T06:33:58.921Z">
+<meta property="og:updated_time" content="2018-05-25T06:58:41.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript学习笔记">
 <meta name="twitter:description" content="通过这篇文章不断记录js使用过程中遇到的问题解决方法。">
@@ -386,10 +386,8 @@
 
       
         <p>通过这篇文章不断记录js使用过程中遇到的问题解决方法。<br><a id="more"></a></p>
-<h2 id="获取iframe内页面的window对象"><a href="#获取iframe内页面的window对象" class="headerlink" title="获取iframe内页面的window对象"></a>获取iframe内页面的window对象</h2><p>设有html文件0.html</p>
-<p><html><body><iframe id="f1" src="1.html"></iframe></body></html></p>
-<p>#在0.html中获得1.html的window对象：<br>x=window.frames[“f1”].contentWindow;<br>y=document.getElementById(‘f1’).contentWindow;<br>z=jQuery(‘#f1’)[0].contentWindow;<br>x==y==z</p>
-<p>#获得父window对象：<br>x.parent;</p>
+<h2 id="获取iframe内页面的window对象"><a href="#获取iframe内页面的window对象" class="headerlink" title="获取iframe内页面的window对象"></a>获取iframe内页面的window对象</h2><p>设有html文件0.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"f1"</span> <span class="attr">src</span>=<span class="string">"1.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在0.html中获得1.html的window对象：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="built_in">window</span>.frames[<span class="string">"f1"</span>].contentWindow;</span><br><span class="line">y=<span class="built_in">document</span>.getElementById(<span class="string">'f1'</span>).contentWindow;</span><br><span class="line">z=jQuery(<span class="string">'#f1'</span>)[<span class="number">0</span>].contentWindow;</span><br><span class="line">x==y==z</span><br><span class="line">#获得父window对象：</span><br><span class="line">x.parent;</span><br></pre></td></tr></table></figure></p>
 <h2 id="JSON对象与字符串互转"><a href="#JSON对象与字符串互转" class="headerlink" title="JSON对象与字符串互转"></a>JSON对象与字符串互转</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">'&#123;"name":"aaa","age":33&#125;'</span>;</span><br><span class="line"><span class="comment">//obj = eval('('+str+')');</span></span><br><span class="line">obj1 = <span class="built_in">JSON</span>.parse(str);</span><br><span class="line">str1 = <span class="built_in">JSON</span>.stringify(obj);</span><br></pre></td></tr></table></figure>
 <h2 id="jquery选择器对象与dom对象互转"><a href="#jquery选择器对象与dom对象互转" class="headerlink" title="jquery选择器对象与dom对象互转"></a>jquery选择器对象与dom对象互转</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj1 = <span class="built_in">document</span>.getElementById(<span class="string">'myid'</span>);</span><br><span class="line">obj2 = $(obj1);</span><br><span class="line">obj3 = $(<span class="string">'#myid'</span>);</span><br><span class="line">obj4 = obj3[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
 <h2 id="获得button所在form的id"><a href="#获得button所在form的id" class="headerlink" title="获得button所在form的id"></a>获得button所在form的id</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'b1'</span>).form.id;</span><br><span class="line">form.children;</span><br></pre></td></tr></table></figure>
@@ -513,7 +511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
