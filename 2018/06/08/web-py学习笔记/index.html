@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="学习笔记,web.py," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="本文通过一个例子演示c++如何自定异常。">
+<meta name="description" content="这篇文章记录一下web.py的学习过程。">
+<meta name="keywords" content="学习笔记,web.py">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++自定义异常实例">
-<meta property="og:url" content="http://yoursite.com/2018/05/25/CPP自定义异常实例/index.html">
+<meta property="og:title" content="web.py学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/06/08/web-py学习笔记/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
-<meta property="og:description" content="本文通过一个例子演示c++如何自定异常。">
+<meta property="og:description" content="这篇文章记录一下web.py的学习过程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-25T05:29:29.465Z">
+<meta property="og:updated_time" content="2018-06-08T02:56:20.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++自定义异常实例">
-<meta name="twitter:description" content="本文通过一个例子演示c++如何自定异常。">
+<meta name="twitter:title" content="web.py学习笔记">
+<meta name="twitter:description" content="这篇文章记录一下web.py的学习过程。">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/25/CPP自定义异常实例/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/08/web-py学习笔记/"/>
 
 
 
 
 
-  <title>C++自定义异常实例 | LCY'sBlog</title>
+  <title>web.py学习笔记 | LCY'sBlog</title>
   
 
 
@@ -296,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/CPP自定义异常实例/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/web-py学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lcy">
@@ -313,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++自定义异常实例</h1>
+          <h1 class="post-title" itemprop="name headline">web.py学习笔记</h1>
         
 
         <div class="post-meta">
@@ -325,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T13:27:22+08:00">
-                2018-05-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T09:34:12+08:00">
+                2018-06-08
               </time>
             
 
@@ -335,6 +336,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -363,8 +386,34 @@
       
 
       
-        <p>本文通过一个例子演示c++如何自定异常。<br><a id="more"></a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Div0Exception</span> :</span> <span class="keyword">public</span> exception</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">what</span><span class="params">()</span> <span class="keyword">const</span> <span class="title">throw</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"divisor is 0"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (b == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> Div0Exception();</span><br><span class="line">	<span class="keyword">return</span> a/b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		divide(<span class="number">10</span>, <span class="number">0</span>);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Div0Exception e) &#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;e.what()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"测试自定义异常"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>这篇文章记录一下web.py的学习过程。<br><a id="more"></a></p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>安装我直接就是<code>pip install web.py</code>，这样会安装最新版本的web.py，好像是0.39版本。更具体的还是参考官网<a href="http://webpy.org/install" target="_blank" rel="noopener">http://webpy.org/install</a>。</p>
+<p>至于教程就不废话了，官网上的应该足够了，说多了都是多余，就是<a href="http://webpy.org/docs/0.3/tutorial" target="_blank" rel="noopener">这个网址</a>，还有一个<a href="http://webpy.org/tutorial3.zh-cn" target="_blank" rel="noopener">中文网址</a>，这好像是直接拿谷歌翻译转的，看起来还不如英文的好理解。</p>
+<p>不废话，直接录代码吧。</p>
+<h2 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h2><p><strong>hello.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> web</span><br><span class="line">render = web.template.render(<span class="string">'templates/'</span>)</span><br><span class="line">urls = (</span><br><span class="line">    <span class="string">'/hello1'</span>, <span class="string">'hello1'</span>,</span><br><span class="line">    <span class="string">'/hello2'</span>, <span class="string">'hello2'</span>,</span><br><span class="line">    <span class="string">'/hello3/(.*)'</span>, <span class="string">'hello3'</span>,</span><br><span class="line">)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hello1</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'hello1'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hello2</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        i = web.input(name=<span class="keyword">None</span>)</span><br><span class="line">        <span class="keyword">return</span> render.hello(i.name)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hello3</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> render.hello(name)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app = web.application(urls, globals())</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+<p><strong>templates/hello.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$def with (name)</span><br><span class="line">$if name:</span><br><span class="line">	I just wanted to say <span class="tag">&lt;<span class="name">em</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">em</span>&gt;</span> to $name.</span><br><span class="line">$else:</span><br><span class="line">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span>hello, world.<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python hello.py <span class="comment">#默认用8080端口</span></span><br><span class="line">python hello.py 1234 <span class="comment">#指定1234端口</span></span><br></pre></td></tr></table></figure>
+<p>访问几个url测试下效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/hello1</span><br><span class="line">http://localhost:8080/hello2</span><br><span class="line">http://localhost:8080/hello2?name=bruce</span><br><span class="line">http://localhost:8080/hello3/</span><br><span class="line">http://localhost:8080/hello3/bruce</span><br></pre></td></tr></table></figure>
+<h2 id="web-py使用数据库"><a href="#web-py使用数据库" class="headerlink" title="web.py使用数据库"></a>web.py使用数据库</h2><p>web.py推荐使用的数据库一般是<code>mysql</code>或<code>postgres</code>，这两个对我这种初学者来说还是有点奢侈，于是我选了<code>sqlite</code>，因为它不用安装，对python2.7来说开箱即用，只需<code>import sqlite3</code>。</p>
+<h3 id="sqlite客户端工具"><a href="#sqlite客户端工具" class="headerlink" title="sqlite客户端工具"></a>sqlite客户端工具</h3><p>我是linux系统，直接敲入<code>sqlite3</code>命令就好了(系统默认安装)，如果想顺带打开数据库，可以这样<code>sqlite3 test.db</code>。windows下安装也简单。</p>
+<p>下面上一段sqlite3命令代码，最终实现创建表，为web.py例子做准备：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.open test.db <span class="comment">-- 打开数据库</span></span><br><span class="line">.databases <span class="comment">-- 查看数据库</span></span><br><span class="line">.tables <span class="comment">-- 查看表</span></span><br><span class="line"><span class="comment">-- 创建user表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span>(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">integer</span> primary <span class="keyword">key</span> autoincrement,</span><br><span class="line">username <span class="built_in">char</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">unique</span>,</span><br><span class="line"><span class="keyword">password</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">not</span> <span class="literal">null</span>);</span><br><span class="line">.schema user <span class="comment">-- 查看建表语句</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(username,<span class="keyword">password</span>) <span class="keyword">values</span>(<span class="string">'aaa'</span>,<span class="string">'111'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(username,<span class="keyword">password</span>) <span class="keyword">values</span>(<span class="string">'bbb'</span>,<span class="string">'111'</span>);</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span>;</span><br><span class="line">.quit <span class="comment">-- 退出sqlite命令</span></span><br></pre></td></tr></table></figure>
+<h3 id="用户注册"><a href="#用户注册" class="headerlink" title="用户注册"></a>用户注册</h3><p><strong>code1.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> web</span><br><span class="line">render = web.template.render(<span class="string">'templates/'</span>)</span><br><span class="line">db = web.database(dbn=<span class="string">'sqlite'</span>, db=<span class="string">'test.db'</span>)</span><br><span class="line">urls = (</span><br><span class="line">    <span class="string">'/'</span>, <span class="string">'index'</span>,</span><br><span class="line">    <span class="string">'/regist'</span>, <span class="string">'regist'</span></span><br><span class="line">)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">index</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        i = web.input(id=<span class="keyword">None</span>)</span><br><span class="line">        <span class="keyword">if</span> i.id:</span><br><span class="line">            users = db.select(<span class="string">'user'</span>, where=<span class="string">'id=$id'</span>, vars=&#123;<span class="string">'id'</span>:i.id&#125;)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            users = db.select(<span class="string">'user'</span>)</span><br><span class="line">        <span class="keyword">return</span> render.index1(users)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">regist</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> render.regist()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">POST</span><span class="params">(self)</span>:</span></span><br><span class="line">        i = web.input()</span><br><span class="line">        n = db.insert(<span class="string">'user'</span>, username=i.username, password=i.password)</span><br><span class="line">        <span class="keyword">raise</span> web.seeother(<span class="string">'/'</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app = web.application(urls, globals())</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+<p><strong>templates/index1.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$def with (users)</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">$for user in users:</span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"u$user.id"</span>&gt;</span>$user.username<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>templates/regist.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"regist"</span>&gt;</span></span><br><span class="line">	username:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">	password:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试一下上面的例子，是可以的。这里记录一下上面获得的<code>users</code>对象可以用<code>uers.list()</code>转成列表，然后就可以进行list的相关操作了。</p>
+<h2 id="python操作数据库"><a href="#python操作数据库" class="headerlink" title="python操作数据库"></a>python操作数据库</h2><p>本节跟web.py无关，只是看到web.py要操作数据库，顺便记录一下python下的操作数据库的方法。</p>
+<p>python操作数据库是我用过的编程语言最方便的，一个<code>cursor</code>包打天下。oracle、mysql、sqlserver、sqlite…我们能想到的关系型数据库，只要安装了相应模块后，除了连接参数不同，其他操作都是一样的。这点就像java的JDBC操作数据库那样，很方便。</p>
+<p>下面，以sqlite为例，演示一下python操作数据库：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3 <span class="comment">#默认安装，其他数据库没这待遇</span></span><br><span class="line">conn = sqlite3.connect(<span class="string">'test.db'</span>) <span class="comment">#打开数据库，没有就创建</span></span><br><span class="line">c = conn.cursor() <span class="comment">#获得数据库操作游标，以后就靠它了</span></span><br><span class="line"><span class="comment"># 建表，后面的操作都一样，就是执行sql语句，就不注释了</span></span><br><span class="line">c.execute(<span class="string">'create table person(name char(10),age int)'</span>)</span><br><span class="line">c.execute(<span class="string">"insert into person(name,age) values('aaa',11)"</span>)</span><br><span class="line">c.execute(<span class="string">"insert into person(name,age) values('bbb',12),('ccc',13)"</span>)</span><br><span class="line">p=(<span class="string">'ccc'</span>,<span class="number">22</span>)</span><br><span class="line">c.execute(<span class="string">'insert into person(name,age) values(?,?)'</span>,p)</span><br><span class="line">rs=c.execute(<span class="string">'select * from person'</span>)</span><br><span class="line"><span class="keyword">for</span> r <span class="keyword">in</span> rs: <span class="keyword">print</span> r[<span class="number">0</span>]</span><br><span class="line">c.execute(<span class="string">"update person set name='ddd' where age=22"</span>)</span><br><span class="line">c.execute(<span class="string">'delete from person where age&gt;20'</span>)</span><br><span class="line">conn.commit() <span class="comment">#提交数据库</span></span><br><span class="line">conn.close() <span class="comment">#关闭数据库</span></span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以后有什么需要记录的web.py使用过程遇到的问题，就在这上面吧。</p>
 
       
     </div>
@@ -380,6 +429,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/web-py/" rel="tag"># web.py</a>
+          
+        </div>
+      
 
       
       
@@ -389,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/25/C-运算符重载实例/" rel="next" title="C++运算符重载实例">
-                <i class="fa fa-chevron-left"></i> C++运算符重载实例
+              <a href="/2018/06/06/centos7-glusterfs-note/" rel="next" title="CentOS7下安装并使用GlusterFS过程记录">
+                <i class="fa fa-chevron-left"></i> CentOS7下安装并使用GlusterFS过程记录
               </a>
             
           </div>
@@ -398,10 +455,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/25/linux-c-thread-sample/" rel="prev" title="linux下c语言多线程实例">
-                linux下c语言多线程实例 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -453,8 +506,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,6 +580,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hello"><span class="nav-number">2.</span> <span class="nav-text">hello</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web-py使用数据库"><span class="nav-number">3.</span> <span class="nav-text">web.py使用数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlite客户端工具"><span class="nav-number">3.1.</span> <span class="nav-text">sqlite客户端工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户注册"><span class="nav-number">3.2.</span> <span class="nav-text">用户注册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python操作数据库"><span class="nav-number">4.</span> <span class="nav-text">python操作数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
