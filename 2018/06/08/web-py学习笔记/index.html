@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="web.py是一个轻量级的python web框架，简单而且功能强大。相对flask和django，web.py更适合初学者来学习和了解web开发的基础知识。这篇文章记录一下web.py的学习过程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-08T11:56:51.081Z">
+<meta property="og:updated_time" content="2018-06-11T01:37:56.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web.py学习笔记">
 <meta name="twitter:description" content="web.py是一个轻量级的python web框架，简单而且功能强大。相对flask和django，web.py更适合初学者来学习和了解web开发的基础知识。这篇文章记录一下web.py的学习过程。">
@@ -434,6 +434,7 @@
 <p>再来一个不用httplib2的稍微繁琐一点的例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">url = <span class="string">'http://localhost:8080/'</span></span><br><span class="line"><span class="comment">#测试GET</span></span><br><span class="line">res = urllib2.urlopen(url)</span><br><span class="line"><span class="keyword">print</span> res.read()</span><br><span class="line"><span class="comment">#测试POST</span></span><br><span class="line">name = &#123;<span class="string">'first'</span>:<span class="string">'aaa'</span>, <span class="string">'last'</span>:<span class="string">'bbb'</span>&#125;</span><br><span class="line">data = urllib.urlencode(name)</span><br><span class="line">req = urllib2.Request(url, data)</span><br><span class="line">res = urllib2.urlopen(req)</span><br><span class="line"><span class="keyword">print</span> res.read()</span><br><span class="line"><span class="comment">#测试PUT</span></span><br><span class="line">req = urllib2.Request(url)</span><br><span class="line">req。get_method = <span class="keyword">lambda</span>:<span class="string">'PUT'</span></span><br><span class="line">res = urllib2.urlopen(req)</span><br><span class="line"><span class="keyword">print</span> res.read()</span><br><span class="line"><span class="comment">#测试DELETE</span></span><br><span class="line">req = urllib2.Request(url)</span><br><span class="line">req。get_method = <span class="keyword">lambda</span>:<span class="string">'DELETE'</span></span><br><span class="line">res = urllib2.urlopen(req)</span><br><span class="line"><span class="keyword">print</span> res.read()</span><br></pre></td></tr></table></figure>
 <p>参考文章：<a href="http://webpy.org/cookbook/restful_doctesting_using_request" target="_blank" rel="noopener">http://webpy.org/cookbook/restful_doctesting_using_request</a>、<a href="http://blog.chinaunix.net/uid-26000296-id-4394470.html" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-26000296-id-4394470.html</a>、<a href="https://blog.csdn.net/d_yang/article/details/2959530" target="_blank" rel="noopener">https://blog.csdn.net/d_yang/article/details/2959530</a></p>
+<h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><p><a href="https://blog.csdn.net/freeking101/article/details/53020865" target="_blank" rel="noopener">https://blog.csdn.net/freeking101/article/details/53020865</a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以后有什么需要记录的web.py学习过程遇到的问题，就在这上面吧。</p>
 
       
@@ -562,7 +563,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -584,7 +585,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -617,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hello"><span class="nav-number">2.</span> <span class="nav-text">hello</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web-py使用数据库"><span class="nav-number">3.</span> <span class="nav-text">web.py使用数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlite客户端工具"><span class="nav-number">3.1.</span> <span class="nav-text">sqlite客户端工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户注册"><span class="nav-number">3.2.</span> <span class="nav-text">用户注册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python操作数据库"><span class="nav-number">4.</span> <span class="nav-text">python操作数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态文件"><span class="nav-number">5.</span> <span class="nav-text">静态文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTful"><span class="nav-number">6.</span> <span class="nav-text">RESTful</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hello"><span class="nav-number">2.</span> <span class="nav-text">hello</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web-py使用数据库"><span class="nav-number">3.</span> <span class="nav-text">web.py使用数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlite客户端工具"><span class="nav-number">3.1.</span> <span class="nav-text">sqlite客户端工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户注册"><span class="nav-number">3.2.</span> <span class="nav-text">用户注册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python操作数据库"><span class="nav-number">4.</span> <span class="nav-text">python操作数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态文件"><span class="nav-number">5.</span> <span class="nav-text">静态文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTful"><span class="nav-number">6.</span> <span class="nav-text">RESTful</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资料"><span class="nav-number">7.</span> <span class="nav-text">学习资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
