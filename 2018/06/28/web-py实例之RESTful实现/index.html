@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="json,web.py," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="LCY&#39;sBlog">
-<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
+<meta name="description" content="前面的web.py学习笔记那篇简单介绍了下web.py如何实现RESTful，现在是微服务的天下，所以有必要把RESTful单独来一个完整的例子，于是有了这篇。">
+<meta name="keywords" content="json,web.py">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web.py实例之RESTful实现">
+<meta property="og:url" content="http://yoursite.com/2018/06/28/web-py实例之RESTful实现/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
+<meta property="og:description" content="前面的web.py学习笔记那篇简单介绍了下web.py如何实现RESTful，现在是微服务的天下，所以有必要把RESTful单独来一个完整的例子，于是有了这篇。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-28T06:23:29.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LCY&#39;sBlog">
+<meta name="twitter:title" content="web.py实例之RESTful实现">
+<meta name="twitter:description" content="前面的web.py学习笔记那篇简单介绍了下web.py如何实现RESTful，现在是微服务的天下，所以有必要把RESTful单独来一个完整的例子，于是有了这篇。">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/page/3/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/28/web-py实例之RESTful实现/"/>
 
 
 
 
 
-  <title>归档 | LCY'sBlog</title>
+  <title>web.py实例之RESTful实现 | LCY'sBlog</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,410 +283,217 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 41 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/web-py实例之RESTful实现/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lcy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/drogba.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCY'sBlog">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">web.py实例之RESTful实现</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-28T14:03:40+08:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/14/gushiwen-collection/" itemprop="url">
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">古诗文收集</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-14T16:59:01+08:00"
-              content="2018-05-14" >
-          05-14
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
 
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/11/python27-to-django-primer/" itemprop="url">
-              
-                <span itemprop="name">从Python到Django入门</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-11T15:32:09+08:00"
-              content="2018-05-11" >
-          05-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/10/socket简单实例的不同语言实现/" itemprop="url">
-              
-                <span itemprop="name">socket简单实例的不同语言实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-10T08:45:58+08:00"
-              content="2018-05-10" >
-          05-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>前面的<a href="https://lcyasdlcy.github.io/2018/06/08/web-py%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">web.py学习笔记</a>那篇简单介绍了下web.py如何实现RESTful，现在是微服务的天下，所以有必要把RESTful单独来一个完整的例子，于是有了这篇。<br><a id="more"></a></p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>这篇实现的例子很简单，就是一个对人员的增删改查。先来个表格：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>URI</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/persons</td>
+<td>获得所有人员信息列表</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/persons</td>
+<td>新增人员</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/persons/id</td>
+<td>获得具体人员信息</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>/persons/id</td>
+<td>整体更新具体人员信息</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>/persons/id</td>
+<td>局部更新具体人员信息</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/persons/id</td>
+<td>删除具体人员信息</td>
+</tr>
+</tbody>
+</table>
+<p>其中<code>PATCH</code>方法就先不实现了，下面就是按照上表逐步实现一个RESTful。</p>
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><p>还是像以前说的那样，我这就是个例子，就直接用sqlite了。先建个person表再在里面插入几条记录，看例子：</p>
+<pre><code class="python">
+</code></pre>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/09/gdb学习笔记/" itemprop="url">
-              
-                <span itemprop="name">gdb学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-09T14:14:19+08:00"
-              content="2018-05-09" >
-          05-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/09/makefile学习笔记/" itemprop="url">
-              
-                <span itemprop="name">makefile学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-09T13:18:29+08:00"
-              content="2018-05-09" >
-          05-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/09/vim使用笔记/" itemprop="url">
-              
-                <span itemprop="name">vim使用笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-09T09:54:34+08:00"
-              content="2018-05-09" >
-          05-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/08/tinyxml2使用学习/" itemprop="url">
-              
-                <span itemprop="name">tinyxml2使用学习</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-08T11:34:54+08:00"
-              content="2018-05-08" >
-          05-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/03/callback主流开发语言如何实现/" itemprop="url">
-              
-                <span itemprop="name">主流开发语言如何实现回调</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-03T11:02:37+08:00"
-              content="2018-05-03" >
-          05-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/26/c-call-java/" itemprop="url">
-              
-                <span itemprop="name">C语言程序调用java代码</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-26T13:56:49+08:00"
-              content="2018-04-26" >
-          04-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/25/jni调用已有的c语言库/" itemprop="url">
-              
-                <span itemprop="name">jni调用已有的c语言库</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-25T16:49:43+08:00"
-              content="2018-04-25" >
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/json/" rel="tag"># json</a>
+          
+            <a href="/tags/web-py/" rel="tag"># web.py</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/19/rabbitmq学习笔记/" rel="next" title="rabbitmq学习笔记">
+                <i class="fa fa-chevron-left"></i> rabbitmq学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -689,6 +501,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -709,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -774,6 +599,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建表"><span class="nav-number">2.</span> <span class="nav-text">建表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -907,6 +748,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
