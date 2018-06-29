@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="前面的web.py学习笔记那篇简单介绍了下web.py如何实现RESTful，现在是微服务的天下，所以有必要把RESTful单独来一个完整的例子，于是有了这篇。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-28T06:23:29.295Z">
+<meta property="og:updated_time" content="2018-06-29T01:13:16.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web.py实例之RESTful实现">
 <meta name="twitter:description" content="前面的web.py学习笔记那篇简单介绍了下web.py如何实现RESTful，现在是微服务的天下，所以有必要把RESTful单独来一个完整的例子，于是有了这篇。">
@@ -394,6 +394,7 @@
 <th>方法</th>
 <th>URI</th>
 <th>描述</th>
+<th>返回值</th>
 </tr>
 </thead>
 <tbody>
@@ -401,38 +402,56 @@
 <td>GET</td>
 <td>/persons</td>
 <td>获得所有人员信息列表</td>
+<td>返回资源对象的列表</td>
 </tr>
 <tr>
 <td>POST</td>
 <td>/persons</td>
 <td>新增人员</td>
+<td>返回新生成的资源对象</td>
 </tr>
 <tr>
 <td>GET</td>
 <td>/persons/id</td>
 <td>获得具体人员信息</td>
+<td>返回单个资源对象</td>
 </tr>
 <tr>
 <td>PUT</td>
 <td>/persons/id</td>
 <td>整体更新具体人员信息</td>
+<td>返回完整的资源对象</td>
 </tr>
 <tr>
 <td>PATCH</td>
 <td>/persons/id</td>
 <td>局部更新具体人员信息</td>
+<td>返回完整的资源对象</td>
 </tr>
 <tr>
 <td>DELETE</td>
 <td>/persons/id</td>
 <td>删除具体人员信息</td>
+<td>返回一个空文档</td>
 </tr>
 </tbody>
 </table>
 <p>其中<code>PATCH</code>方法就先不实现了，下面就是按照上表逐步实现一个RESTful。</p>
 <h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><p>还是像以前说的那样，我这就是个例子，就直接用sqlite了。先建个person表再在里面插入几条记录，看例子：</p>
-<pre><code class="python">
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line">conn = sqlite3.connect(<span class="string">'test.db'</span>)</span><br><span class="line">c = conn.cursor()</span><br><span class="line">sql = <span class="string">'create table person(\</span></span><br><span class="line"><span class="string">id integer primary key autoincrement,\</span></span><br><span class="line"><span class="string">name char(10) not null,\</span></span><br><span class="line"><span class="string">age int)'</span></span><br><span class="line">c.execute(sql)</span><br><span class="line">sql = <span class="string">'insert into person(name,age) values(?,?)'</span></span><br><span class="line">person = (<span class="string">u'小红'</span>,<span class="number">12</span>)</span><br><span class="line">c.execute(sql, person)</span><br><span class="line">rs = c.execute(<span class="string">'select * from person'</span>)</span><br><span class="line"><span class="keyword">for</span> r <span class="keyword">in</span> rs: <span class="keyword">print</span> r[<span class="number">0</span>], r[<span class="number">1</span>], r[<span class="number">2</span>]</span><br><span class="line">conn.commit()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+<h2 id="RESTful实现"><a href="#RESTful实现" class="headerlink" title="RESTful实现"></a>RESTful实现</h2><p>下面是RESTful实现的例子，虽然很小，但基本功能应该都有了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> web</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">db = web.database(dbn=<span class="string">'sqlite'</span>, db=<span class="string">'test.db'</span>)</span><br><span class="line">urls = (</span><br><span class="line">        <span class="string">'/persons'</span>, <span class="string">'persons'</span>,</span><br><span class="line">        <span class="string">'/persons/(\d+)'</span>, <span class="string">'personOne'</span>,</span><br><span class="line">        )</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app = web.application(urls, globals())</span><br><span class="line">    app.run()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">persons</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'获得人员信息列表'</span></span><br><span class="line">        web.header(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>)</span><br><span class="line">        ps = db.select(<span class="string">'person'</span>)</span><br><span class="line">        ps = ps.list()</span><br><span class="line">        jstr = json.dumps(ps)</span><br><span class="line">        <span class="keyword">return</span> jstr</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">POST</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment">#curl -XPOST -H 'Content-Type:application/json;charset=utf-8' 'http://localhost:8080/persons' -d '&#123;"name":"小刚","age":11&#125;'</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'添加人员'</span></span><br><span class="line">        web.header(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>)</span><br><span class="line">        webData = web.data().decode(<span class="string">'gbk'</span>)</span><br><span class="line">        dinfo = json.loads(webData)</span><br><span class="line">        <span class="comment">#print dinfo</span></span><br><span class="line">        n = db.insert(<span class="string">'person'</span>, **dinfo)</span><br><span class="line">        <span class="keyword">if</span> n &gt; <span class="number">0</span>:</span><br><span class="line">            rlt = <span class="string">u'添加人员成功'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            rlt = <span class="string">u'添加人员失败'</span></span><br><span class="line">        <span class="keyword">return</span> json.dumps(rlt)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">personOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self, id)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'获得具体人员信息'</span></span><br><span class="line">        web.header(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>)</span><br><span class="line">        ps = db.select(<span class="string">'person'</span>, where=<span class="string">'id=$id'</span>, vars=locals())</span><br><span class="line">        ps = ps.list()</span><br><span class="line">        <span class="keyword">if</span> len(ps) &gt; <span class="number">0</span>:</span><br><span class="line">            p = ps[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p = &#123;<span class="string">'error'</span>: <span class="string">u'人员不存在'</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> json.dumps(p)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">PUT</span><span class="params">(self, id)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'更新具体人员信息'</span></span><br><span class="line">        web.header(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>)</span><br><span class="line">        webData = web.data().decode(<span class="string">'gbk'</span>)</span><br><span class="line">        dinfo = json.loads(webData)</span><br><span class="line">        n = db.update(<span class="string">'person'</span>, where=<span class="string">'id=%s'</span>%id, **dinfo)</span><br><span class="line">        <span class="keyword">if</span> n &gt; <span class="number">0</span>:</span><br><span class="line">            rlt = <span class="string">u'更新人员成功'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            rlt = <span class="string">u'更新人员失败'</span></span><br><span class="line">        <span class="keyword">return</span> json.dumps(rlt)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">DELETE</span><span class="params">(self, id)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'删除具体人员'</span></span><br><span class="line">        db.delete(<span class="string">'person'</span>, where=<span class="string">'id=%s'</span>%id)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line"><span class="comment">#        raise seeother('/persons')</span></span><br></pre></td></tr></table></figure>
+<p>上面的例子中的PUT和POST并没有按照RESTful API的返回规范进行返回，既然这么写了，也不想改了，以后注意一下啊。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这里先说一下我的测试环境：</p>
+<ul>
+<li>以上python代码是运行在win7下的。</li>
+<li>测试rest是用的win7下的gitbash里带的curl。</li>
+</ul>
+<p>这样的情况下传递中文原来是有错的，上面代码中是我根据实际情况调整过的，不知道换到linux下会不会有问题。</p>
+<p>下面是测试命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET <span class="string">'http://localhost:8080/persons'</span></span><br><span class="line">curl -XPOST -H <span class="string">'Content-Type:application/json;charset=utf-8'</span> \</span><br><span class="line">	<span class="string">'http://localhost:8080/persons'</span> -d <span class="string">'&#123;"name":"小小","age":12&#125;'</span></span><br><span class="line">curl -XPUT -H <span class="string">'Content-Type:application/json;charset=utf-8'</span> \</span><br><span class="line">	<span class="string">'http://localhost:8080/persons/1'</span> -d <span class="string">'&#123;"name":"小明明","age":12&#125;'</span></span><br><span class="line">curl -XGET <span class="string">'http://localhost:8080/persons/4'</span></span><br><span class="line">curl -XDELETE <span class="string">'http://localhost:8080/persons/4'</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://webpy.org/cookbook/" target="_blank" rel="noopener">http://webpy.org/cookbook/</a><br><a href="https://piaosanlang.gitbooks.io/web-py/content/index.html" target="_blank" rel="noopener">https://piaosanlang.gitbooks.io/web-py/content/index.html</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过这个例子应该能知道基本的RESTful是如何实现的。</p>
 
       
     </div>
@@ -609,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建表"><span class="nav-number">2.</span> <span class="nav-text">建表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建表"><span class="nav-number">2.</span> <span class="nav-text">建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTful实现"><span class="nav-number">3.</span> <span class="nav-text">RESTful实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
