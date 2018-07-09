@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LCY&#39;sBlog">
 <meta property="og:description" content="RabbitMQ是一个用erlang语言开发的AMQP(Advanved Message Queue)的开源实现。用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。由于它现在很流行，这篇就把安装及使用rabbitmq的过程做一下笔记。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-26T05:11:03.482Z">
+<meta property="og:updated_time" content="2018-07-09T05:44:19.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rabbitmq学习笔记">
 <meta name="twitter:description" content="RabbitMQ是一个用erlang语言开发的AMQP(Advanved Message Queue)的开源实现。用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。由于它现在很流行，这篇就把安装及使用rabbitmq的过程做一下笔记。">
@@ -393,7 +393,7 @@
 <p>这时的yum源中还是没有rabbitmq的，但是已经有了一个rabbitmq的yum源的源，我们安装之：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br><span class="line">yum makecache</span><br><span class="line">yum repolist <span class="comment">#看看是否安装成功了</span></span><br></pre></td></tr></table></figure>
 <p>下面就可以用yum命令安装rabbitmq了，也不用管是哪个版本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install rabbitmq-server</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install rabbitmq-server</span><br><span class="line">yum install --downloadonly --downloaddir=/tmp rabbitmq-server <span class="comment">#只下载不安装</span></span><br></pre></td></tr></table></figure>
 <p>只要这么一条命令，所有依赖一起装好，方便。</p>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>rabbitmq提供最简单的启动方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server -detached</span><br></pre></td></tr></table></figure>
