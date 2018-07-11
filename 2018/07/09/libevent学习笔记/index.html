@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="libevent,学习笔记," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="LCY&#39;sBlog">
-<meta property="og:url" content="http://yoursite.com/tags/centos/index.html">
+<meta name="description" content="这篇记录libevent学习过程的问题。">
+<meta name="keywords" content="libevent,学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libevent学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/libevent学习笔记/index.html">
 <meta property="og:site_name" content="LCY&#39;sBlog">
+<meta property="og:description" content="这篇记录libevent学习过程的问题。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-11T06:23:43.494Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LCY&#39;sBlog">
+<meta name="twitter:title" content="libevent学习笔记">
+<meta name="twitter:description" content="这篇记录libevent学习过程的问题。">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/centos/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/09/libevent学习笔记/"/>
 
 
 
 
 
-  <title>标签: centos | LCY'sBlog</title>
+  <title>libevent学习笔记 | LCY'sBlog</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,54 +283,186 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>centos<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/libevent学习笔记/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lcy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/drogba.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCY'sBlog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/06/centos7-glusterfs-note/" itemprop="url">
-              
-                <span itemprop="name">CentOS7下安装并使用GlusterFS过程记录</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">libevent学习笔记</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-06T17:41:15+08:00"
-              content="2018-06-06" >
-          06-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-09T16:08:44+08:00">
+                2018-07-09
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇记录libevent学习过程的问题。<br><a id="more"></a></p>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>这节基本都是照搬的<a href="https://blog.csdn.net/majianfei1023/article/details/46485705" target="_blank" rel="noopener">这篇</a>，为了更熟悉，我照抄一遍。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>libevent是一个轻量级的高性能的事件触发的网络库，适用于windows、linux、bsd等多平台，内部使用select、epoll、kqueue等系统调用管理事件机制。</p>
+<p>它被众多开源项目使用，如memcached等。</p>
+<p>libevent有如下特点：</p>
+<ul>
+<li>事件驱动，高性能</li>
+<li>轻量级，专注于网络（相对ACE）</li>
+<li>开源，代码精炼、易读</li>
+<li>跨平台</li>
+<li>支持I/O多路复用技术（epoll、poll、dev/poll、select和kqueue等），在不同操作系统下，做了多路复用模型的抽象，可以选择使用不同的模型，通过事件函数提供服务</li>
+<li>支持I/O，定时器和信号等事件</li>
+<li>采用Reactor模式</li>
+</ul>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>原文有通用的安装方法，我太懒了。我的centos7试试yum是否可以：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install libevent-devel</span><br><span class="line">rpm -qa|grep libevent <span class="comment">#居然还是libevent2，很好</span></span><br><span class="line">rpm -ql libevent-devel <span class="comment">#头文件、库文件都在</span></span><br><span class="line">whereis libevent <span class="comment">#确实能找到</span></span><br></pre></td></tr></table></figure>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>libevent提供了事件通知，io缓存事件，定时器，超时，异步解析dns，事件驱动的http server以及一个rpc框架。下面介绍一下：</p>
+<ul>
+<li>事件通知：当文件描述符可读可写时将执行回调函数。</li>
+<li>io缓存：缓存事件提供了输入输出缓存，能自动的读入和写入，用户不必直接操作io。</li>
+<li>定时器：libevent提供了定时器的机制，能够在一定的时间间隔之后调用回调函数。</li>
+<li>信号：触发信号，执行回调。</li>
+<li>异步的dns解析：libevent提供了异步解析dns服务器的dns解析函数集。</li>
+<li>事件驱动的http服务器：libevent提供了一个简单的，可集成到应用程序中的http服务器。</li>
+<li>RPC客户端服务器框架：libevent为创建RPC服务器和客户端创建了一个RPC框架，能自动的封装和解封数据结构。</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>libevent是一个典型的reactor模式的实现。简单介绍：</p>
+<p>普通的函数调用机制如下：程序调用某个函数、函数执行、程序等待、程序将结果返回给调用程序，即顺序执行。</p>
+<p>而reactor模式的基本流程如下：应用程序需要提供相应的接口并且注册到reactor反应器上，如果相应的事件发生的话，那么reactor将自动调用相应的注册的接口函数（类似于回调函数）通知你，所以libevent是事件触发的网络库。</p>
+<p>看个简单例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;event.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onTime</span><span class="params">(<span class="keyword">int</span> sock, <span class="keyword">short</span> event, <span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"hello, world.\n"</span>);</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">tv</span>;</span></span><br><span class="line">	tv.tv_sec = <span class="number">1</span>;</span><br><span class="line">	tv.tv_usec = <span class="number">0</span>;</span><br><span class="line">	event_add((struct event*)arg, &amp;tv);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	event_init();</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">event</span> <span class="title">ev_time</span>;</span></span><br><span class="line">	evtimer_set(&amp;ev_time, onTime, &amp;ev_time);</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">tv</span>;</span></span><br><span class="line">	tv.tv_sec = <span class="number">1</span>;</span><br><span class="line">	tv.tv_usec = <span class="number">0</span>;</span><br><span class="line">	event_add(&amp;ev_time, &amp;tv);</span><br><span class="line">	event_dispatch();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc test1.c -levent <span class="comment">#编译</span></span><br><span class="line">./a.out <span class="comment">#运行</span></span><br></pre></td></tr></table></figure>
+<h2 id="深入浅出"><a href="#深入浅出" class="headerlink" title="深入浅出"></a>深入浅出</h2><p>这章完全抄自<a href="https://aceld.gitbooks.io/libevent/content/" target="_blank" rel="noopener">https://aceld.gitbooks.io/libevent/content/</a>，这里就是为这个教程做个学习笔记。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/libevent/" rel="tag"># libevent</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/03/windows下c向redis发收数据/" rel="next" title="windows下c向redis发收数据">
+                <i class="fa fa-chevron-left"></i> windows下c向redis发收数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/10/linux-questions/" rel="prev" title="linux问题汇总">
+                linux问题汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -333,6 +470,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -353,8 +494,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -418,6 +568,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">1.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能"><span class="nav-number">1.3.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.4.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入浅出"><span class="nav-number">2.</span> <span class="nav-text">深入浅出</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -551,6 +717,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
